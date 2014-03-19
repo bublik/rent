@@ -1,0 +1,7 @@
+.authform
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f|
+    %h3 Забыли пароль?
+    %p Мы отправим вам инстукции по восстановлению
+    = devise_error_messages!
+    = f.input :email, :autofocus => true
+    = f.submit 'Reset Password', :class => 'button right'

@@ -29,11 +29,12 @@ group :development do
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
 end
+
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
-  gem 'thin'
 end
+
 group :test do
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
