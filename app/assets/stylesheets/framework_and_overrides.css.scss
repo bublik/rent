@@ -6,44 +6,75 @@
 img {
   @extend .img-responsive;
   margin: 0 auto;
-  }
+}
+
 // override for the 'Home' navigation link
 .navbar-brand {
   font-size: inherit;
-  }
+}
+
 .help-block {
   margin-right: 15px;
 }
+
+.has-error {
+  .help-inline {
+    float: right;
+    color: #F00;
+    margin-bottom: 19px;
+    margin-right: 5%;
+  }
+  //  input[type=text], input[type=number], input[type=email], textarea {
+  //    border: 1px solid red;
+  //  }
+}
+
 .form-group {
   min-height: 25px;
+  clear: both;
 }
+
+select.datetime, select.time {
+  width: 18%;
+  display: inline-block;
+}
+
 input[type="radio"].form-control {
   width: auto;
   height: auto;
 }
 
+.radio, .checkbox {
+  margin-top: 0;
+}
+
 .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
   box-shadow: none;
 }
+
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes
 // to make views framework-neutral
 .column {
   @extend .col-md-6;
   @extend .text-center;
-  }
+}
+
 .form {
   @extend .col-md-6;
-  }
+}
+
 .form-centered {
   @extend .col-md-6;
   @extend .text-center;
-  }
+}
+
 .submit {
   @extend .btn;
   @extend .btn-primary;
   @extend .btn-lg;
-  }
+}
+
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
@@ -51,11 +82,12 @@ main {
   padding-bottom: 80px;
   width: 100%;
   margin-top: 51px; // accommodate the navbar
-  }
+}
+
 section {
   @extend .row;
   margin-top: 20px;
-  }
+}
 
 // Styles for Devise views
 // using Bootstrap
@@ -65,28 +97,35 @@ section {
   max-width: 510px;
   margin: 0 auto;
 }
+
 .authform form {
   @extend .well;
   @extend .well-lg;
   padding-bottom: 40px;
 }
+
 .authform .right {
   float: right !important;
 }
+
 .authform .button {
   @extend .btn;
   @extend .btn-primary;
 }
+
 .authform fieldset {
   @extend .well;
 }
+
 #error_explanation {
   @extend .alert;
   @extend .alert-danger;
 }
+
 #error_explanation h2 {
   font-size: 16px;
 }
+
 .button-xs {
   @extend .btn;
   @extend .btn-primary;

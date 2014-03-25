@@ -1,0 +1,15 @@
+= simple_form_for(@renter) do |f|
+  = f.error_notification
+  .row
+    = f.input :phone
+    = f.input :email
+    = f.input :guard_time
+    = f.input :town
+    = f.input :rooms
+    = f.input :amount
+    = f.input :сheck_in
+    = f.input :description, as: :text
+
+  .row
+    .col-md-2.col-md-offset-4.mtop10
+      = f.button :submit, class: 'btn btn-info'

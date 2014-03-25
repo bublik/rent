@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def icon_tag(type= '')
+    content_tag(:i, '', class: "glyphicon glyphicon-#{type}")
+  end
+
   def display_base_errors resource
     return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join

@@ -4,5 +4,7 @@
     = f.input :email, :autofocus => true
     = f.input :password
     = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
-    = f.button :submit, 'Войти', :class => 'btn-primary'
+    .row
+      .col-md-2.col-md-offset-4
+        = f.button :submit, 'Войти', :class => 'btn-primary'
   = render "devise/shared/links"

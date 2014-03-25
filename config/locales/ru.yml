@@ -258,4 +258,19 @@ ru:
         phone: 'Телефон'
         description: 'Описание'
         remember_me: 'Запомнить меня'
-
+      renter:
+        phone: Телефон
+        email: Емейл
+        guard_time: Скрывать до
+        town: Город
+        rooms: Комнат
+        amount: Цена $
+        сheck_in: Время заселения
+        description: Описание
+        updated_at: Добавлено
+  helpers:
+    submit:
+      rent:
+        create: "Добавить %{model}"
+        submit: "Сохранить %{model}"
+        update: "Обновить %{model}"
