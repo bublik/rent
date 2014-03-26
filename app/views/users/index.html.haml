@@ -7,7 +7,9 @@
           %th ФИО
           %th Телефон
           %th Емейл
-          //%th Дата рег.
+          %th Оплачено
+          %th Просмотрено
+          %th Добавлено
           %th Описание
           %th Роль
           %th
@@ -18,7 +20,11 @@
             %td= link_to user.name, user
             %td= user.phone
             %td= mail_to user.email
-            //%td= user.created_at.to_date
+            %td
+              = user.free_orders
+              = link_to(icon_tag('plus'), "#balance-options-#{user.id}", "data-toggle" => "modal", class: 'btn btn-xs btn-warning')
+            %td= user.orders_count
+            %td= user.renters_count
             %td= user.description
             %td
               %a.btn.btn-xs.btn-warning{"data-toggle" => "modal", :href => "#role-options-#{user.id}", :type => "button"}

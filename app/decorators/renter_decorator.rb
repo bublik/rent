@@ -2,7 +2,7 @@ class RenterDecorator < Draper::Decorator
   delegate_all
 
   def phone
-    h.number_to_phone(object.phone)
+    h.icon_tag('phone') + ' ' + h.number_to_phone(object.phone)
   end
 
   def amount
@@ -21,7 +21,7 @@ class RenterDecorator < Draper::Decorator
     object.guard_time.to_s(:short)
   end
 
-  def сheck_in
-    object.сheck_in.to_s(:time)
+  def check_in
+    h.icon_tag('home') + ' ' + object.check_in.to_s(:short)
   end
 end

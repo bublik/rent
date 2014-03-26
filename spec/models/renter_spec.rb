@@ -2,17 +2,19 @@
 #
 # Table name: renters
 #
-#  id          :integer          not null, primary key
-#  phone       :string(255)
-#  email       :string(255)
-#  guard_time  :datetime
-#  town        :string(255)
-#  rooms       :integer
-#  amount      :integer
-#  сheck_in    :time
-#  description :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id           :integer          not null, primary key
+#  phone        :string(255)
+#  email        :string(255)
+#  guard_time   :datetime
+#  town         :string(255)
+#  rooms        :integer
+#  amount       :integer
+#  сheck_in     :datetime
+#  description  :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  user_id      :integer          default(1), not null
+#  orders_count :integer          default(0), not null
 #
 
 require 'spec_helper'

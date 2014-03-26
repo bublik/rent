@@ -7,15 +7,21 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 puts 'ROLES'
-  User::ROLES.each do |role|
+
+User::ROLES.each do |role|
   Role.find_or_create_by_name(role)
   puts 'role: ' << role
+
+  puts 'DEFAULT USER'
+  user = User.find_or_create_by_email name: role,
+                                      email: "#{role}@localhost.com",
+                                      password: 'password',
+                                      password_confirmation: 'password'
+  puts 'user: ' << user.name
+  user.add_role role
+  user.confirm!
 end
-puts 'DEFAULT USERS'
-user = User.find_or_create_by_email name: 'Admin',
-                                    email: 'rebisall@gmail.com',
-                                    password: 'password',
-                                    password_confirmation: 'password'
-puts 'user: ' << user.name
-user.add_role :admin
-user.confirm!
+manager = User.find_by_name('manager')
+20.times do |i|
+  FactoryGirl.create(:renter, user: manager)
+end

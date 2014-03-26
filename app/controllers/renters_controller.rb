@@ -8,11 +8,13 @@ class RentersController < ApplicationController
   def index
     @renters = Renter.actual
     @renters = current_user.renters if current_user.has_role?(:manager)
+    @renters = @renters.order('check_in')
   end
 
   # GET /renters/1
   # GET /renters/1.json
   def show
+
   end
 
   # GET /renters/new
@@ -66,13 +68,15 @@ class RentersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_renter
-      @renter = Renter.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_renter
+    @renter = Renter.find(params[:id])
+    @renter = current_user.renters.find(params[:id]) if current_user.has_role?(:manager)
+    @renter.create_order(current_user) if current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor)
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def renter_params
-      params.require(:renter).permit(:phone, :email, :guard_time, :town, :rooms, :amount, :сheck_in, :description)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def renter_params
+    params.require(:renter).permit(:phone, :email, :guard_time, :town, :rooms, :amount, :сheck_in, :description)
+  end
 end

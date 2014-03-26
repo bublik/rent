@@ -30,6 +30,9 @@
 #  invitations_count      :integer          default(0)
 #  phone                  :string(255)
 #  description            :string(255)
+#  orders_count           :integer          default(0), not null
+#  renters_count          :integer          default(0), not null
+#  free_orders            :integer          default(0), not null
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
@@ -40,6 +43,8 @@ FactoryGirl.define do
     sequence(:email) {|n| "email#{n}@factory.com" }
     password 'changeme'
     password_confirmation 'changeme'
+    free_orders 1
+
     # required if the Devise Confirmable module is used
     confirmed_at Time.now
   end

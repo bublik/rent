@@ -30,6 +30,9 @@
 #  invitations_count      :integer          default(0)
 #  phone                  :string(255)
 #  description            :string(255)
+#  orders_count           :integer          default(0), not null
+#  renters_count          :integer          default(0), not null
+#  free_orders            :integer          default(0), not null
 #
 
 require 'spec_helper'

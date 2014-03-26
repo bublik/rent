@@ -9,10 +9,9 @@
         %span.label.label-info= renter.rooms
         %span.label.label-success= renter.amount
       %span{ data: {toggle: 'tooltip', placement: 'left', title: 'Время заезда'}}
-        = icon_tag('home')
-        = renter.сheck_in
+        = renter.check_in
 
-  - if can? :show, renter
+  - if renter.public_access
     .row
       .col-md-6
         .phone{ data: {toggle: 'tooltip', placement: 'left', title: 'Телефон'}}

@@ -258,6 +258,7 @@ ru:
         phone: 'Телефон'
         description: 'Описание'
         remember_me: 'Запомнить меня'
+        free_orders: 'Оплачено просмотров'
       renter:
         phone: Телефон
         email: Емейл

@@ -14,9 +14,9 @@ class UsersController < ApplicationController
     authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      redirect_to users_path, :notice => "User updated."
+      redirect_to users_path, :notice => "Пользователь изменен!"
     else
-      redirect_to users_path, :alert => "Unable to update user."
+      redirect_to users_path, :alert => "Невозможно изменить пользователя."
     end
   end
     
@@ -25,9 +25,9 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     unless user == current_user
       user.destroy
-      redirect_to users_path, :notice => "User deleted."
+      redirect_to users_path, :notice => "Пользователь удален."
     else
-      redirect_to users_path, :notice => "Can't delete yourself."
+      redirect_to users_path, :notice => "Вы не можете себя удалить."
     end
   end
 
@@ -38,6 +38,6 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:email, :name, :phone, :description)
-    params.require(:user).permit(:role_ids) if current_user.has_role?(:admin)
+    params.require(:user).permit(:role_ids, :free_orders) if current_user.has_role?(:admin)
   end
 end

@@ -25,20 +25,20 @@ describe OrdersController do
     end
   end
 
-  describe "GET new" do
-    it "assigns a new order as @order" do
-      get :new, {}
-      assigns(:order).should be_a_new(Order)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested order as @order" do
-      order = Order.create! valid_attributes
-      get :edit, {:id => order.to_param}
-      assigns(:order).should eq(order)
-    end
-  end
+  #describe "GET new" do
+  #  it "assigns a new order as @order" do
+  #    get :new, {}
+  #    assigns(:order).should be_a_new(Order)
+  #  end
+  #end
+  #
+  #describe "GET edit" do
+  #  it "assigns the requested order as @order" do
+  #    order = Order.create! valid_attributes
+  #    get :edit, {:id => order.to_param}
+  #    assigns(:order).should eq(order)
+  #  end
+  #end
 
   describe "POST create" do
     describe "with valid params" do
@@ -77,49 +77,49 @@ describe OrdersController do
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested order" do
-        order = Order.create! valid_attributes
-        # Assuming there are no other orders in the database, this
-        # specifies that the Order created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Order.any_instance.should_receive(:update).with({"user_id" => ""})
-        put :update, {:id => order.to_param, :order => {"user_id" => ""}}
-      end
-
-      it "assigns the requested order as @order" do
-        order = Order.create! valid_attributes
-        put :update, {:id => order.to_param, :order => valid_attributes}
-        assigns(:order).should eq(order)
-      end
-
-      it "redirects to the order" do
-        order = Order.create! valid_attributes
-        put :update, {:id => order.to_param, :order => valid_attributes}
-        response.should redirect_to(order)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the order as @order" do
-        order = Order.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Order.any_instance.stub(:save).and_return(false)
-        put :update, {:id => order.to_param, :order => {"user" => "invalid value"}}
-        assigns(:order).should eq(order)
-      end
-
-      it "re-renders the 'edit' template" do
-        order = Order.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Order.any_instance.stub(:save).and_return(false)
-        put :update, {:id => order.to_param, :order => {"user" => "invalid value"}}
-        response.should render_template("edit")
-      end
-    end
-  end
+  #describe "PUT update" do
+  #  describe "with valid params" do
+  #    it "updates the requested order" do
+  #      order = Order.create! valid_attributes
+  #      # Assuming there are no other orders in the database, this
+  #      # specifies that the Order created on the previous line
+  #      # receives the :update_attributes message with whatever params are
+  #      # submitted in the request.
+  #      Order.any_instance.should_receive(:update).with({"user_id" => ""})
+  #      put :update, {:id => order.to_param, :order => {"user_id" => ""}}
+  #    end
+  #
+  #    it "assigns the requested order as @order" do
+  #      order = Order.create! valid_attributes
+  #      put :update, {:id => order.to_param, :order => valid_attributes}
+  #      assigns(:order).should eq(order)
+  #    end
+  #
+  #    it "redirects to the order" do
+  #      order = Order.create! valid_attributes
+  #      put :update, {:id => order.to_param, :order => valid_attributes}
+  #      response.should redirect_to(order)
+  #    end
+  #  end
+  #
+  #  describe "with invalid params" do
+  #    it "assigns the order as @order" do
+  #      order = Order.create! valid_attributes
+  #      # Trigger the behavior that occurs when invalid params are submitted
+  #      Order.any_instance.stub(:save).and_return(false)
+  #      put :update, {:id => order.to_param, :order => {"user" => "invalid value"}}
+  #      assigns(:order).should eq(order)
+  #    end
+  #
+  #    it "re-renders the 'edit' template" do
+  #      order = Order.create! valid_attributes
+  #      # Trigger the behavior that occurs when invalid params are submitted
+  #      Order.any_instance.stub(:save).and_return(false)
+  #      put :update, {:id => order.to_param, :order => {"user" => "invalid value"}}
+  #      response.should render_template("edit")
+  #    end
+  #  end
+  #end
 
   describe "DELETE destroy" do
     it "destroys the requested order" do
