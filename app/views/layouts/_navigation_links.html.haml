@@ -1,12 +1,16 @@
 %li= link_to 'Объявления', renters_path
 
-- if user_signed_in? && (current_user.has_role?(:admin) || current_user.has_role?(:manager))
-  %li= link_to 'Новый съемщик', new_renter_path
-
-- if user_signed_in? && current_user.has_role?(:admin)
-  %li= link_to 'Пользователи', users_path
-
 - if user_signed_in?
+
+  - if current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor)
+    %li= link_to 'Оплачены', renters_path(with_order: true), title: 'Оплаченные объявления'
+
+  - if (current_user.has_role?(:admin) || current_user.has_role?(:manager))
+    %li= link_to 'Новый съемщик', new_renter_path
+
+  - if  current_user.has_role?(:admin)
+    %li= link_to 'Пользователи', users_path
+
   %li= link_to 'Профиль', edit_user_registration_path
   %li= link_to 'Выйти', destroy_user_session_path, :method=>'delete'
 - else

@@ -28,6 +28,7 @@ class Renter < ActiveRecord::Base
   validates :rooms, numericality: true
 
   scope :actual, -> { where('guard_time >= ?', Time.now) }
+  scope :with_order, -> (user) { joins(:orders).where('orders.user_id =? ', user.id) }
 
   def create_order(user)
     order = Order.find_or_create_by(user_id: user.id, renter_id: self.id)

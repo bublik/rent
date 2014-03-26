@@ -256,9 +256,10 @@ ru:
         password_confirmation: 'Подтверждение пароля'
         current_password: 'Текущий пароль'
         phone: 'Телефон'
-        description: 'Описание'
+        description: 'О себе'
         remember_me: 'Запомнить меня'
-        free_orders: 'Оплачено просмотров'
+        free_orders: 'Доступно просмотров'
+        orders_count: 'Открыто объявл.'
       renter:
         phone: Телефон
         email: Емейл
