@@ -260,6 +260,7 @@ ru:
         remember_me: 'Запомнить меня'
         free_orders: 'Доступно просмотров'
         orders_count: 'Открыто объявл.'
+        subscribe: 'Подписка'
       renter:
         phone: Телефон
         email: Емейл

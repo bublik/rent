@@ -9,7 +9,7 @@ class RentersController < ApplicationController
     @renters = Renter.actual
     @renters = current_user.renters if current_user.has_role?(:manager)
     @renters = @renters.order('check_in')
-    @renters = @renters.with_order(current_user) if params[:with_order]
+    @renters = @renters.with_order(current_user) if params[:with_order].eql?('true')
   end
 
   # GET /renters/1

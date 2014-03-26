@@ -1,5 +1,3 @@
-%h2 Отредактировать
-
 .row
   .col-md-6.col-md-offset-3
     = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => :form, :method => :put, :class => 'form-horizontal' }) do |f|
@@ -9,6 +7,7 @@
 
       = f.input :phone
       = f.input :email, :required => true
+      = f.input :subscribe, hint: 'Получать письма с новыми объявлениями'
       = f.input :description, as: :text
 
       = f.input :free_orders, disabled: true

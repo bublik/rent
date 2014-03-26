@@ -18,6 +18,8 @@
           = renter.phone
         .email
           = renter.email
+  - elsif action_name.eql?('show')
+    %span.label.label-danger оплатите информацию
   .row
     .col-md-12.text-muted
       %em
@@ -30,4 +32,5 @@
       .actions
         - if renter.user_id.eql?(current_user.id)
           = link_to 'Изменить', edit_renter_path(renter), class: 'btn btn-default btn-sm'
-        = link_to 'Посмотреть', renter_path(renter), class: 'btn btn-success btn-sm'
+        - unless action_name.eql?('show')
+          = link_to 'Посмотреть', renter_path(renter), class: 'btn btn-success btn-sm'

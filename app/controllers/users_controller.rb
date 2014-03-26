@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, :name, :phone, :description)
+    params.require(:user).permit(:email, :name, :phone, :description, :subscribe)
     params.require(:user).permit(:role_ids, :free_orders) if current_user.has_role?(:admin)
   end
 end
