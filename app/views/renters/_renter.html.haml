@@ -11,7 +11,7 @@
       %span{ data: {toggle: 'tooltip', placement: 'left', title: 'Время заезда'}}
         = renter.check_in
 
-  - if renter.public_access
+  - if can?(:show, renter) || renter.public_access
     .row
       .col-md-6
         .phone{ data: {toggle: 'tooltip', placement: 'left', title: 'Телефон'}}

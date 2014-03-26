@@ -30,9 +30,17 @@ class Renter < ActiveRecord::Base
   scope :actual, -> { where('guard_time >= ?', Time.now) }
   scope :with_order, -> (user) { joins(:orders).where('orders.user_id =? ', user.id) }
 
+  after_create :send_notification
+
   def create_order(user)
     order = Order.find_or_create_by(user_id: user.id, renter_id: self.id)
     @public_access = order.new_record? ? false : true
+  end
+
+  def send_notification
+    User.subscribers.each do |user|
+      Notifications.new_renter(user, self).deliver
+    end
   end
 
 end

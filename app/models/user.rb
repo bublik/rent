@@ -46,5 +46,6 @@ class User < ActiveRecord::Base
 
   has_many :renters
   has_many :orders
+  scope :subscribers, -> { where(subscribe: true) }
 
 end
