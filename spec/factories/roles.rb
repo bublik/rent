@@ -13,6 +13,20 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :role do
+  factory :admin do
+    name: 'admin'
   end
+
+  factory :manager do
+    name: 'manager'
+  end
+
+  factory :vip_realtor do
+    name: 'vip_realtor'
+  end
+
+  factory :realtor do
+    name: 'realtor'
+  end
+
 end

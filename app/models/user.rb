@@ -33,6 +33,8 @@
 #
 
 class User < ActiveRecord::Base
+  ROLES = ['admin', 'manager', 'realtor', 'vip_realtor']
+
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

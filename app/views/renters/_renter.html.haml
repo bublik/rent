@@ -8,16 +8,17 @@
       %h4
         %span.label.label-info= renter.rooms
         %span.label.label-success= renter.amount
-    .col-md-6{ data: {toggle: 'tooltip', placement: 'left', title: 'Время заезда'}}
-      = icon_tag('home')
-      = renter.сheck_in
+      %span{ data: {toggle: 'tooltip', placement: 'left', title: 'Время заезда'}}
+        = icon_tag('home')
+        = renter.сheck_in
 
-  .row
-    .col-md-6
-      .phone{ data: {toggle: 'tooltip', placement: 'left', title: 'Телефон'}}
-        = renter.phone
-      .email
-        = renter.email
+  - if can? :show, renter
+    .row
+      .col-md-6
+        .phone{ data: {toggle: 'tooltip', placement: 'left', title: 'Телефон'}}
+          = renter.phone
+        .email
+          = renter.email
   .row
     .col-md-12.text-muted
       %em

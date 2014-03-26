@@ -31,6 +31,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def for_assign
+    @users = User.with_role(params[:role])
+  end
+
   private
   def user_params
     params.require(:user).permit(:email, :name, :phone, :description)

@@ -1,2 +1,7 @@
-
 = render @renter
+- if current_user.has_role?(:admin)
+  .row
+    .col-md-12
+      = link_to('VIP Маклера', for_assign_users_path(role: 'vip_realtor'), remote: true, class: 'btn btn-sm btn-warning')
+      = link_to('Маклера', for_assign_users_path(role: 'realtor'), remote: true, class: 'btn btn-sm btn-primary')
+  .realtors
