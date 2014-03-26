@@ -14,19 +14,19 @@
 
 FactoryGirl.define do
   factory :admin do
-    name: 'admin'
+    name 'admin'
   end
 
   factory :manager do
-    name: 'manager'
+    name 'manager'
   end
 
   factory :vip_realtor do
-    name: 'vip_realtor'
+    name 'vip_realtor'
   end
 
   factory :realtor do
-    name: 'realtor'
+    name 'realtor'
   end
 
 end

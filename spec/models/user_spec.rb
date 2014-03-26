@@ -134,4 +134,11 @@ describe User do
 
   end
 
+  describe "check User factory" do
+    let(:user) { FactoryGirl.create(:user) }
+    it 'should be saved record' do
+      user.new_record?.should be_false
+    end
+  end
+
 end

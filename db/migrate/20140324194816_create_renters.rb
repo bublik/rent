@@ -7,7 +7,7 @@ class CreateRenters < ActiveRecord::Migration
       t.string :town
       t.integer :rooms
       t.integer :amount
-      t.time :сheck_in
+      t.datetime :сheck_in
       t.string :description
 
       t.timestamps

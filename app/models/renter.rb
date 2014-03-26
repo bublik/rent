@@ -10,14 +10,15 @@
 #  town        :string(255)
 #  rooms       :integer
 #  amount      :integer
-#  сheck_in    :time
+#  сheck_in    :datetime
 #  description :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
 #
 
 class Renter < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, counter_cache: true
+  has_many :orders
 
   validate :user_id, :phone, :email, :town, :rooms, :amount, presence: true
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create}

@@ -18,5 +18,23 @@
 require 'spec_helper'
 
 describe Renter do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { FactoryGirl.create(:user) }
+  let(:renter) { FactoryGirl.build(:renter, user: user) }
+
+  it 'should valid record' do
+    renter.valid?.should be_true
+  end
+
+  it 'should create new record in db' do
+    expect {
+      renter.save
+    }.to change { Renter.count }.from(0).to(1)
+  end
+
+  it 'should increase counters' do
+    renter.save
+    user.reload
+    user.renters_count.should eq(1)
+  end
+
 end

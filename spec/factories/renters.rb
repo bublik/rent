@@ -9,7 +9,7 @@
 #  town        :string(255)
 #  rooms       :integer
 #  amount      :integer
-#  сheck_in    :time
+#  сheck_in    :datetime
 #  description :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
@@ -19,13 +19,13 @@
 
 FactoryGirl.define do
   factory :renter do
-    phone "MyString"
-    email "MyString"
-    guard_time "2014-03-24 21:48:16"
+    phone "809305070663"
+    sequence(:email) { |n| "email#{n}@renter.com" }
+    guard_time { DateTime.tomorrow }
     town "MyString"
     rooms 1
     amount 1
-    сheck_in "2014-03-24 21:48:16"
+    сheck_in { DateTime.tomorrow }
     description "MyString"
   end
 end

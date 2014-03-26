@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325182536) do
+ActiveRecord::Schema.define(version: 20140326170536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "orders", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "renter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "orders", ["renter_id"], name: "index_orders_on_renter_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "renters", force: true do |t|
     t.string   "phone"
@@ -23,11 +33,12 @@ ActiveRecord::Schema.define(version: 20140325182536) do
     t.string   "town"
     t.integer  "rooms"
     t.integer  "amount"
-    t.time     "сheck_in"
+    t.datetime "сheck_in"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id",     default: 1, null: false
+    t.integer  "user_id",      default: 1, null: false
+    t.integer  "orders_count", default: 0, null: false
   end
 
   create_table "roles", force: true do |t|
@@ -69,6 +80,8 @@ ActiveRecord::Schema.define(version: 20140325182536) do
     t.integer  "invitations_count",      default: 0
     t.string   "phone"
     t.string   "description"
+    t.integer  "orders_count",           default: 0,  null: false
+    t.integer  "renters_count",          default: 0,  null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

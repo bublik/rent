@@ -1,4 +1,6 @@
 Rent::Application.routes.draw do
+  resources :orders
+
   resources :renters
 
   root :to => "home#index"
