@@ -247,6 +247,10 @@ ru:
       short: ! '%d %B, %H:%M'
     pm: вечера
   activerecord:
+    models:
+      renter:
+        one: "Съемщик"
+        other: "Съемщики"
     attributes:
       user:
         email: 'Емейл'
@@ -274,7 +278,7 @@ ru:
         updated_at: Добавлено
   helpers:
     submit:
-      rent:
+      renter:
         create: "Добавить %{model}"
         submit: "Сохранить %{model}"
         update: "Обновить %{model}"

@@ -30,7 +30,7 @@ class Renter < ActiveRecord::Base
   scope :hide_inactive, -> { where('check_out >= ?', Time.now) }
   scope :with_order, -> (user) { joins(:orders).where('orders.user_id =? ', user.id) }
 
-  before_save :preset
+  after_initialize :preset
   after_create :send_notification
 
   def preset
