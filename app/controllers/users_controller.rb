@@ -3,14 +3,20 @@ class UsersController < ApplicationController
 
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
-    @users = User.all
+    @role = params[:role]
+    @users = User.with_role(@role)
+
+    respond_to do |format|
+      format.html {}
+      format.js {render partial: 'users', format: :html, layout: false}
+    end
   end
 
   def show
     @user = User.find(params[:id])
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
   end
-  
+
   def update
     authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @user = User.find(params[:id])
@@ -20,7 +26,7 @@ class UsersController < ApplicationController
       redirect_to users_path, :alert => "Невозможно изменить пользователя."
     end
   end
-    
+
   def destroy
     authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
     user = User.find(params[:id])

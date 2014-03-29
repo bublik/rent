@@ -1,34 +1,14 @@
-%h3 Users
-.row
-  .col-md-12
-    %table.table
-      %thead
-        %tr
-          %th ФИО
-          %th Телефон
-          %th Емейл
-          %th Оплачено
-          %th Просмотрено
-          %th Добавлено
-          %th Описание
-          %th Роль
-          %th
-          %th
-      %tbody
-        - @users.each do |user|
-          %tr
-            %td= link_to user.name, user
-            %td= user.phone
-            %td= mail_to user.email
-            %td
-              = user.free_orders
-              = link_to(icon_tag('plus'), "#balance-options-#{user.id}", "data-toggle" => "modal", class: 'btn btn-xs btn-warning')
-            %td= user.orders_count
-            %td= user.renters_count
-            %td= user.description
-            %td
-              %a.btn.btn-xs.btn-warning{"data-toggle" => "modal", :href => "#role-options-#{user.id}", :type => "button"}
-                %span.glyphicon.glyphicon-wrench
-              = user.roles.first.name.titleize unless user.roles.first.nil?
-              = render user
-            %td= link_to(content_tag(:span, 'Удалить', class: 'glyphicon glyphicon-remove'), user_path(user), :data => { :confirm => "Вы уверены?" }, :method => :delete, :class => 'btn btn-xs btn-warning') unless user == current_user
+%ul#users.nav.nav-tabs
+  %li= link_to('Новые', '#new', remote: true, data: {toggle: 'tab', targer: users_path(format: :js) })
+  %li= link_to('Риэлторы', '#realtor', remote: true, data: {toggle: 'tab', targer: users_path(format: :js, role: 'realtor')})
+  %li= link_to('VIP Риэлторы', '#vip_realtor', remote: true, data: {toggle: 'tab', targer: users_path(format: :js, role: 'vip_realtor')})
+  %li= link_to('Менеджеры', '#manager', remote: true, data: {toggle: 'tab', targer: users_path(format: :js, role: 'manager')})
+  %li= link_to('Администраторы', '#admin', remote: true, data: {toggle: 'tab', targer: users_path(format: :js, role: 'admin')})
+
+.tab-content
+  #new.tab-pane.fade
+  #realtor.tab-pane.fade realtor
+  #vip_realtor.tab-pane.fade vip realtor
+  #manager.tab-pane.fade  manger
+  #admin.tab-pane.fade   admin
+
