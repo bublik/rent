@@ -7,7 +7,12 @@ Rent::Application.routes.draw do
   resources :users do
     collection do
       get 'for_assign/:role', action: :for_assign, as: :for_assign
+      post 'create', action: :create, as: :newaccount
+
     end
+    #member do
+    #  get 'edit', action: :edit, as: :editaccount
+    #end
   end
 
   resources :orders

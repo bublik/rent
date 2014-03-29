@@ -14,7 +14,6 @@
           %th Описание
           %th Роль
           %th
-          %th
       %tbody
         - @users.each do |user|
           %tr
@@ -34,4 +33,7 @@
                 %span.glyphicon.glyphicon-wrench
               = user.roles.first.name.titleize unless user.roles.first.nil?
               = render user
-            %td= link_to(content_tag(:span, 'Удалить', class: 'glyphicon glyphicon-remove'), user_path(user), :data => { :confirm => "Вы уверены?" }, :method => :delete, :class => 'btn btn-xs btn-warning') unless user == current_user
+            %td
+              = link_to(content_tag(:span, 'Изменить', class: 'glyphicon glyphicon-wrench'), edit_user_path(user), :class => 'btn btn-xs btn-warning')
+              = link_to(content_tag(:span, 'Удалить', class: 'glyphicon glyphicon-remove'), user_path(user), :data => { :confirm => "Вы уверены?" }, :method => :delete, :class => 'btn btn-xs btn-warning') unless user == current_user
+

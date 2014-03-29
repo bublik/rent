@@ -8,8 +8,30 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html {}
-      format.js {render partial: 'users', format: :html, layout: false}
+      format.js { render partial: 'users', format: :html, layout: false }
     end
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to users_path, notice: 'Запись успешно добавлена.' }
+        format.json { render action: 'show', status: :created, location: @user }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def edit
+    @user = User.find(params[:id])
   end
 
   def show
@@ -20,9 +42,13 @@ class UsersController < ApplicationController
   def update
     authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @user = User.find(params[:id])
+
+#    user_params.delete(:current_password)
+
     if @user.update_attributes(user_params)
       redirect_to users_path, :notice => "Пользователь изменен!"
     else
+      logger.debug(@user.errors.full_messages.inspect)
       redirect_to users_path, :alert => "Невозможно изменить пользователя."
     end
   end
@@ -45,7 +71,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, :name, :phone, :description, :subscribe)
-    params.require(:user).permit(:role_ids, :free_orders) if current_user.has_role?(:admin)
+    params.require(:user).permit(:name, :email, :phone, :description, :subscribe, :role_ids, :free_orders, :password, :password_confirmation)
   end
 end

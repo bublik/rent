@@ -1,9 +1,11 @@
+.text-right
+  = link_to('Новый пользователь', new_user_path, class: 'btn btn-success btn-xs')
 %ul#users.nav.nav-tabs
-  %li= link_to('Новые', '#new', remote: true, data: {toggle: 'tab', targer: users_path(format: :js) })
-  %li= link_to('Риэлторы', '#realtor', remote: true, data: {toggle: 'tab', targer: users_path(format: :js, role: 'realtor')})
-  %li= link_to('VIP Риэлторы', '#vip_realtor', remote: true, data: {toggle: 'tab', targer: users_path(format: :js, role: 'vip_realtor')})
-  %li= link_to('Менеджеры', '#manager', remote: true, data: {toggle: 'tab', targer: users_path(format: :js, role: 'manager')})
-  %li= link_to('Администраторы', '#admin', remote: true, data: {toggle: 'tab', targer: users_path(format: :js, role: 'admin')})
+  %li= link_to('Новые', '#new', data: {toggle: 'tab', targer: users_path(format: :js) })
+  %li= link_to('Риэлторы', '#realtor',  data: {toggle: 'tab', targer: users_path(format: :js, role: 'realtor')})
+  %li= link_to('VIP Риэлторы', '#vip_realtor', data: {toggle: 'tab', targer: users_path(format: :js, role: 'vip_realtor')})
+  %li= link_to('Менеджеры', '#manager', data: {toggle: 'tab', targer: users_path(format: :js, role: 'manager')})
+  %li= link_to('Администраторы', '#admin', data: {toggle: 'tab', targer: users_path(format: :js, role: 'admin')})
 
 .tab-content
   #new.tab-pane.fade

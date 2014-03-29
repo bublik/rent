@@ -1,0 +1,15 @@
+.row
+  .col-md-6
+    = simple_form_for(@user, url: user_path(@user), :html => {method: :put, class: 'form-vertical' }) do |f|
+      = f.input :name, :autofocus => true
+      = f.input :email, :required => true
+      = f.input :free_orders
+      = f.input :description, as: :text
+
+      -#= f.input :password, :required => true
+      -#= f.input :password_confirmation, :required => true
+
+      = f.input :role_ids, :collection => Role.all, :as => :radio_buttons, :label_method => lambda {|t| t.name.titleize}, :item_wrapper_class => 'inline', checked: @user.role_ids.first
+
+      .col-md-4
+        = f.button :submit, 'Изменить', :class => 'btn-primary'
