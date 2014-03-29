@@ -11,11 +11,20 @@ class Ability
       can :manage, Renter, {user_id: user.id}
     end
 
-    #if user.has_role? :vip_realtor
-    #  can :show, Renter do |renter|
-    #    renter.shows.where(:user_id, user.id).count.eql?(1)
-    #  end
-    #end
+    if user.has_role? :realtor
+      can :show, Renter do |renter|
+        renter.guard_time < Time.now ||
+        renter.orders.where('user_id = ?', user.id).count.eql?(1)
+      end
+    end
+
+
+    if user.has_role? :vip_realtor
+      can :show, Renter do |renter|
+        renter.guard_time < Time.now ||
+        renter.orders.where('user_id = ?', user.id).count.eql?(1)
+      end
+    end
 
     # Define abilities for the passed in user here. For example:
     #

@@ -42,7 +42,7 @@ ru:
     formats:
       default: ! '%d.%m.%Y'
       long: ! '%-d %B %Y'
-      short: ! '%-d %b'
+      short: ! '%-D %b'
     order:
     - :day
     - :month
@@ -244,7 +244,7 @@ ru:
     formats:
       default: ! '%a, %d %b %Y, %H:%M:%S %z'
       long: ! '%d %B %Y, %H:%M'
-      short: ! '%d %b, %H:%M'
+      short: ! '%d %B, %H:%M'
     pm: вечера
   activerecord:
     attributes:
@@ -268,7 +268,8 @@ ru:
         town: Город
         rooms: Комнат
         amount: Цена $
-        сheck_in: Время заселения
+        check_in: Время заселения
+        check_out: Время выезда
         description: Описание
         updated_at: Добавлено
   helpers:

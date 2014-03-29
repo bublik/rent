@@ -1,1 +1,1 @@
-$('.realtors').html('#{j = @users.map(&:name)}')
+$('.realtors').html('#{ j render(partial: 'renters/user_grant_access', locals: {users: @users, renter_id: params[:renter_id]}) }')

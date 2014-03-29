@@ -1,21 +1,40 @@
 class RentersController < ApplicationController
   before_filter :authenticate_user!
-
+  helper_method :sort_column, :sort_direction
   before_action :set_renter, only: [:show, :edit, :update, :destroy]
+  before_action :create_order, only: [:show]
 
   # GET /renters
   # GET /renters.json
   def index
-    @renters = Renter.actual
+    @renters = Renter.order(sort_column + " " + sort_direction)
     @renters = current_user.renters if current_user.has_role?(:manager)
-    @renters = @renters.order('check_in')
+    @renters = @renters.hide_inactive if current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor)
     @renters = @renters.with_order(current_user) if params[:with_order].eql?('true')
   end
 
   # GET /renters/1
   # GET /renters/1.json
   def show
+  end
 
+  def grant_access
+    if (order = Order.where(user_id: params[:user_id], renter_id: params[:id]).first) && order.destroy
+      state = 'removed'
+    else
+      state = 'created' if Order.create!(user_id: params[:user_id], renter_id: params[:id], skip_payment: true)
+    end
+
+    respond_to do |format|
+      format.js {
+        case state
+          when 'created'
+            render text: "$('.realtors #user_#{params[:user_id]} .btn').addClass('btn-success');"
+          when 'removed'
+            render text: "$('.realtors #user_#{params[:user_id]} .btn').removeClass('btn-success');"
+        end
+      }
+    end
   end
 
   # GET /renters/new
@@ -69,15 +88,26 @@ class RentersController < ApplicationController
   end
 
   private
+  def sort_column
+    Renter.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_renter
     @renter = Renter.find(params[:id])
     @renter = current_user.renters.find(params[:id]) if current_user.has_role?(:manager)
+  end
+
+  def create_order
     @renter.create_order(current_user) if current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def renter_params
-    params.require(:renter).permit(:phone, :email, :guard_time, :town, :rooms, :amount, :check_in, :description)
+    params.require(:renter).permit(:phone, :email, :guard_time, :town, :rooms, :amount, :check_in, :check_out, :description)
   end
 end

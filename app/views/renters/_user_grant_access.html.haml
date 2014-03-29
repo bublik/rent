@@ -1,0 +1,6 @@
+- users.each do |user|
+  = div_for(user) do
+    = link_to(user.name, grant_access_renter_path(id: renter_id, user_id: user.id),
+      title: "#{user.email}, #{user.phone}",
+      remote: true,
+      class: "btn btn-default btn-xs #{ 'btn-success' if @assigned_user_ids.include?(user.id)}")

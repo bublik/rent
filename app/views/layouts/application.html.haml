@@ -12,10 +12,6 @@
       = render 'layouts/navigation'
 
     %main{:role => "main"}
-      - if user_signed_in? && Rails.env.development?
-        .pull-right
-          - current_user.roles.pluck(:name).each do |role|
-            %span.label.label-primary #{role}
       .container
         .content
           = render 'layouts/messages'

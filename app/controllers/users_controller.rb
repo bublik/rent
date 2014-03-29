@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    authorize! :index, @user, :message => 'Not authorized as an administrator.'
   end
   
   def update
@@ -33,6 +34,7 @@ class UsersController < ApplicationController
 
   def for_assign
     @users = User.with_role(params[:role])
+    @assigned_user_ids = Order.where('renter_id = ?', params[:renter_id]).pluck(:user_id)
   end
 
   private

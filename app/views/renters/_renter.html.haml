@@ -1,36 +1,37 @@
 - renter = renter.decorate
-= div_for(renter, class: 'well') do
-  .row.text-info
-    .col-md-6
-      .h4
-        -#= "##{renter.id}"
-        = renter.town
-      %h4
-        %span.label.label-info= renter.rooms
-        %span.label.label-success= renter.amount
-      %span{ data: {toggle: 'tooltip', placement: 'left', title: 'Время заезда'}}
-        = renter.check_in
 
-  - if can?(:show, renter) || renter.public_access
-    .row
-      .col-md-6
-        .phone{ data: {toggle: 'tooltip', placement: 'left', title: 'Телефон'}}
-          = renter.phone
-        .email
-          = renter.email
-  - elsif action_name.eql?('show')
-    %span.label.label-danger оплатите информацию
-  .row
-    .col-md-12.text-muted
-      %em
-        = renter.description
-  .row
-    .col-md-12
-      - if Rails.env.development? || current_user.has_role?(:admin)
-        Приватное до
-        = renter.guard_time
-      .actions
-        - if renter.user_id.eql?(current_user.id)
-          = link_to 'Изменить', edit_renter_path(renter), class: 'btn btn-default btn-sm'
-        - unless action_name.eql?('show')
-          = link_to 'Посмотреть', renter_path(renter), class: 'btn btn-success btn-sm'
+%tr.text-info.renter{'data-url' => renter_path(renter)}
+  %td.h5= renter.town
+  %td= renter.updated_at
+  %td
+    %ul.nav.nav-pills.nav-stacked
+      %li.active
+        %a{href: '#'}
+          = renter.rooms
+          %span.badge.pull-right= renter.amount
+  %td
+    %span{ data: {toggle: 'tooltip', placement: 'top', title: 'Время заезда'}}
+      = renter.check_in
+      \-
+      = renter.check_out
+  %td
+    - if can?(:show, renter.object)
+      .phone
+        = renter.phone
+      .email
+        = renter.email
+    - else
+      - if action_name.eql?('show')
+        %span.label.label-danger оплатите информацию
+        .text-muted
+          = icon_tag('eye-close')
+          = renter.guard_time
+      - else
+        = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
+  %td.text-muted.description.small
+    %em= renter.description
+  %td
+    .btn-group
+      = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
+      - if can?(:edit, renter.object)
+        = link_to icon_tag('wrench', 'Изменить'), edit_renter_path(renter), class: 'btn btn-info btn-xs'

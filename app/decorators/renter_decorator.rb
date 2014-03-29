@@ -6,11 +6,11 @@ class RenterDecorator < Draper::Decorator
   end
 
   def amount
-    h.number_to_currency(object.amount, unit: '$')
+    h.number_to_currency(object.amount, precision: 0, unit: '$')
   end
 
   def email
-    h.mail_to(object.email)
+    h.icon_tag('envelope') + ' ' + h.mail_to(object.email)
   end
 
   def rooms
@@ -18,10 +18,24 @@ class RenterDecorator < Draper::Decorator
   end
 
   def guard_time
-    object.guard_time.to_s(:short)
+    h.l(object.guard_time, format: :short)
   end
 
   def check_in
-    h.icon_tag('home') + ' ' + object.check_in.to_s(:short)
+    h.l(object.check_in, format: :short)
   end
+
+  def check_out
+    h.l(object.check_out, format: :short)
+  end
+
+  def created_at
+    h.l(object.created_at, format: :short)
+  end
+
+  def updated_at
+    h.l(object.updated_at, format: :short)
+  end
+
+
 end

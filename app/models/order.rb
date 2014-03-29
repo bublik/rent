@@ -16,8 +16,8 @@ class Order < ActiveRecord::Base
   validate :user_id, :renter_id, presence: true
   validates_uniqueness_of :renter_id, scope: :user_id
 
-  validate :check_user_balance
-  after_create :decrement_user_balance
+  validate :check_user_balance, unless: :skip_payment
+  after_create :decrement_user_balance, unless: :skip_payment
 
   def check_user_balance
     errors.add(:base, 'Пополните баланс!') if user.free_orders <= 0

@@ -20,21 +20,25 @@
 class Renter < ActiveRecord::Base
   belongs_to :user, counter_cache: true
   has_many :orders
-  attr_accessor :public_access
 
   validate :user_id, :phone, :email, :town, :rooms, :amount, presence: true
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create}
   validates :amount, numericality: true
   validates :rooms, numericality: true
 
-  scope :actual, -> { where('guard_time >= ?', Time.now) }
+  scope :newest, -> { order('updated_at DESC') }
+  scope :hide_inactive, -> { where('check_out >= ?', Time.now) }
   scope :with_order, -> (user) { joins(:orders).where('orders.user_id =? ', user.id) }
 
+  before_save :preset
   after_create :send_notification
 
+  def preset
+    self.guard_time ||= Time.now + 4.hours
+  end
+
   def create_order(user)
-    order = Order.find_or_create_by(user_id: user.id, renter_id: self.id)
-    @public_access = order.new_record? ? false : true
+    Order.find_or_create_by(user_id: user.id, renter_id: self.id)
   end
 
   def send_notification

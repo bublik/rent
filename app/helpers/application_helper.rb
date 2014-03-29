@@ -1,7 +1,7 @@
 module ApplicationHelper
 
-  def icon_tag(type= '')
-    content_tag(:i, '', class: "glyphicon glyphicon-#{type}")
+  def icon_tag(type= '', title = '')
+    content_tag(:i, '', class: "glyphicon glyphicon-#{type}", title: title)
   end
 
   def display_base_errors resource
@@ -14,6 +14,13 @@ module ApplicationHelper
     </div>
     HTML
     html.html_safe
+  end
+
+  def sortable(column, title = nil)
+    title ||= column.titleize
+    css_class = column == sort_column ? "current #{sort_direction}" : nil
+    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+    link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
 
 end
