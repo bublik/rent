@@ -1,5 +1,5 @@
 class Notifications < ActionMailer::Base
-  default(from: "test@localhost.com", return_path: 'noreplay@localhost.com')
+  default(from: "noreplay@clubweb.com.ua", return_path: 'noreplay@clubweb.com.ua')
 
   def new_renter(user, renter)
     @user = user

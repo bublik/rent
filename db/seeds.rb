@@ -14,10 +14,10 @@ User::ROLES.each do |role|
 
   puts 'DEFAULT USER'
   user = User.find_or_create_by_email name: role,
-                                      email: "#{role}@localhost.com",
-                                      password: 'password',
-                                      password_confirmation: 'password'
-  puts 'user: ' << user.name
+                                      email: "#{role}@clubweb.com.ua",
+                                      password: "#{role}password",
+                                      password_confirmation: "#{role}password"
+  puts "user: #{role} | email: #{role}@clubweb.com.ua |  password: #{role}password" << user.name
   user.add_role role
   user.confirm!
 end
