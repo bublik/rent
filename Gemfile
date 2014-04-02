@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
 ruby '2.1.1'
+
 gem 'rails', '4.0.4'
+#gem 'pg'
+gem 'mysql2'
+
 gem 'sass-rails', '~> 4.0.2'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -12,10 +16,12 @@ gem 'cancan'
 gem 'devise'
 gem 'devise_invitable'
 gem 'haml-rails'
-gem 'pg'
+
 gem 'rolify'
 gem 'simple_form'
 gem 'draper', '~> 1.3'
+gem 'capistrano', require: false
+gem 'rvm-capistrano'
 
 group :development do
   gem 'letter_opener'
@@ -31,6 +37,8 @@ group :development do
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
+  gem 'capistrano-rails', '~> 1.1', require: false
+  gem 'capistrano-bundler', '~> 1.1.2', require: false
 end
 
 group :development, :test do
