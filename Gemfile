@@ -5,6 +5,7 @@ gem 'rails', '4.0.4'
 #gem 'pg'
 gem 'mysql2'
 
+gem 'execjs'
 gem 'sass-rails', '~> 4.0.2'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -21,7 +22,7 @@ gem 'rolify'
 gem 'simple_form'
 gem 'draper', '~> 1.3'
 gem 'capistrano', require: false
-gem 'rvm-capistrano'
+gem 'rvm1-capistrano3', require:  false
 
 group :development do
   gem 'letter_opener'
