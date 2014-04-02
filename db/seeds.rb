@@ -17,7 +17,7 @@ User::ROLES.each do |role|
                                       email: "#{role}@clubweb.com.ua",
                                       password: "#{role}password",
                                       password_confirmation: "#{role}password"
-  puts "user: #{role} | email: #{role}@clubweb.com.ua |  password: #{role}password" << user.name
+  puts "user: #{role} | email: #{role}@clubweb.com.ua |  password: #{role}password"
   user.add_role role
   user.confirm!
 end
