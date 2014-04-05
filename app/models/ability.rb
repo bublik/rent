@@ -9,6 +9,8 @@ class Ability
       can :manage, :all
     end
 
+    can :update, User, {id: user.id}
+
     if user.has_role? :manager
       can :manage, Renter, {user_id: user.id}
     end

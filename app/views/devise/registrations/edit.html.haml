@@ -1,19 +1,19 @@
 .row
   .col-md-6.col-md-offset-3
-    = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => :form, :method => :put, :class => 'form-horizontal' }) do |f|
+    = simple_form_for(resource, :as => resource_name, :url => user_path(resource), :html => { :role => :form, :method => :put, :class => 'form-horizontal' }) do |f|
       = f.error_notification
       = display_base_errors resource
       = f.input :name, :autofocus => true
 
       = f.input :phone
       = f.input :email, :required => true
-      = f.input :subscribe, hint: 'Получать письма с новыми объявлениями'
       = f.input :description, as: :text
       - if resource.has_role?(:realtor) || resource.has_role?(:vip_realtor)
+        = f.input :subscribe, hint: 'Получать письма с новыми объявлениями'
         = f.input :free_orders, disabled: true
         = f.input :orders_count, disabled: true
 
       -#= f.input :password, :autocomplete => "off", :hint => "оставьте пустым если не хотите изменять", :required => false
       -#= f.input :password_confirmation, :required => false
-      = f.input :current_password, :hint => "введите текущий пароль для подтверждения изменений", :required => true
+      -#= f.input :current_password, :hint => "введите текущий пароль для подтверждения изменений", :required => true
       = f.button :submit, 'Сохранить', :class => 'btn-primary'

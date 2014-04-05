@@ -253,7 +253,7 @@ ru:
         other: "Съемщики"
     attributes:
       user:
-        email: 'Емейл'
+        email: 'Email'
         username: 'ФИО'
         name: 'ФИО'
         password: 'Пароль'
@@ -268,7 +268,7 @@ ru:
         role_ids: 'Роль'
       renter:
         phone: Телефон
-        email: Емейл
+        email: Email
         guard_time: Скрывать до
         town: Город
         rooms: Комнат

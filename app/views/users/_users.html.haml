@@ -5,7 +5,7 @@
         %tr
           %th ФИО
           %th Телефон
-          %th Емейл
+          %th Email
           - if @role.eql?('manager')
             %th Объявлений
           - elsif !@role.eql?('admin')

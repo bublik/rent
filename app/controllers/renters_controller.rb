@@ -98,7 +98,7 @@ class RentersController < ApplicationController
   end
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
   # Use callbacks to share common setup or constraints between actions.

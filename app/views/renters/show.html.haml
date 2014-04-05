@@ -1,5 +1,48 @@
-%table.table
-  = render @renter
+- renter = @renter.decorate
+.well
+  .row
+    .col-md-3
+      .h3= renter.town
+  .row
+    .col-md-3
+      %ul.nav.nav-pills.nav-stacked
+        %li.active
+          %a{href: '#'}
+            = renter.rooms
+            %span.badge.pull-right= renter.amount
+
+    .col-md-2
+      - if can?(:show, renter.object)
+        .phone
+          = renter.phone
+        .email
+          = renter.email
+      - else
+        %span.label.label-danger оплатите информацию
+        .text-muted
+          = icon_tag('eye-close')
+          = renter.guard_time
+    .col-md-2
+      .btn-group
+        - if can?(:edit, renter.object)
+          = link_to icon_tag('wrench', 'Изменить'), edit_renter_path(renter), class: 'btn btn-info btn-sm'
+        - if can?(:delete, renter.object)
+          = link_to icon_tag('trash', 'Удалить'), renter_path(renter), method: :delete, data: {confirm: 'Вы уверены что хотите удалить?'}, class: 'btn btn-info btn-sm'
+
+
+  .row.text-info
+    .col-md-4.mtop10
+      %span{ data: {toggle: 'tooltip', placement: 'top', title: 'Время заезда'}}
+        = renter.check_in
+        \-
+        = renter.check_out
+
+  .row
+    .col-md-6.mtop10.text-muted.small
+      %em= renter.description(action_name)
+  %div.mtop10
+    Обновлено:
+    = renter.updated_at
 - if current_user.has_role?(:admin)
   .row
     .col-md-12

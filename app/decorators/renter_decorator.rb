@@ -17,6 +17,10 @@ class RenterDecorator < Draper::Decorator
     "#{object.rooms} ком."
   end
 
+  def description(action_name = 'index')
+    action_name.eql?('index') ? h.truncate(object.description, length: 60) : object.description
+  end
+
   def guard_time
     h.l(object.guard_time, format: :short)
   end

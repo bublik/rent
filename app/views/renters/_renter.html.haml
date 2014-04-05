@@ -29,11 +29,12 @@
       - else
         = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
   %td.text-muted.description.small
-    %em= renter.description
+    %em= renter.description(action_name)
   %td
     .btn-group
-      = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
+      - unless action_name.eql?('show')
+        = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
       - if can?(:edit, renter.object)
         = link_to icon_tag('wrench', 'Изменить'), edit_renter_path(renter), class: 'btn btn-info btn-xs'
       - if can?(:delete, renter.object)
-        = link_to icon_tag('trash', 'Изменить'), renter_path(renter), method: :delete, data: {confirm: 'Вы уверены что хотите удалить?'}, class: 'btn btn-info btn-xs'
+        = link_to icon_tag('trash', 'Удалить'), renter_path(renter), method: :delete, data: {confirm: 'Вы уверены что хотите удалить?'}, class: 'btn btn-info btn-xs'
