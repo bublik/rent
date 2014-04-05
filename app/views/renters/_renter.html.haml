@@ -8,12 +8,12 @@
       %li.active
         %a{href: '#'}
           = renter.rooms
-          %span.badge.pull-right= renter.amount
+          %span.badge.pull-right
+            = renter.amount
+            = renter.amount_grn
   %td
-    %span{ data: {toggle: 'tooltip', placement: 'top', title: 'Время заезда'}}
-      = renter.check_in
-      \-
-      = renter.check_out
+    %span{ data: {toggle: 'tooltip', placement: 'top', title: 'Заезд/Выезд'}}
+      %div #{renter.check_in} #{renter.check_out}
   %td
     - if can?(:show, renter.object)
       .phone
@@ -21,20 +21,18 @@
       .email
         = renter.email
     - else
-      - if action_name.eql?('show')
-        %span.label.label-danger оплатите информацию
-        .text-muted
-          = icon_tag('eye-close')
-          = renter.guard_time
-      - else
-        = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
+      %span.label.label-danger оплатите информацию
+      .text-muted
+        = icon_tag('eye-close')
+        = renter.guard_time
   %td.text-muted.description.small
     %em= renter.description(action_name)
   %td
     .btn-group
-      - unless action_name.eql?('show')
-        = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
-      - if can?(:edit, renter.object)
-        = link_to icon_tag('wrench', 'Изменить'), edit_renter_path(renter), class: 'btn btn-info btn-xs'
-      - if can?(:delete, renter.object)
-        = link_to icon_tag('trash', 'Удалить'), renter_path(renter), method: :delete, data: {confirm: 'Вы уверены что хотите удалить?'}, class: 'btn btn-info btn-xs'
+      - if user_signed_in?
+        - if !current_user.has_role?(:manager)
+          = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
+        - if can?(:edit, renter.object)
+          = link_to icon_tag('wrench', 'Изменить'), edit_renter_path(renter), class: 'btn btn-info btn-xs'
+        - if can?(:delete, renter.object)
+          = link_to icon_tag('trash', 'Удалить'), renter_path(renter), method: :delete, data: {confirm: 'Вы уверены что хотите удалить?'}, class: 'btn btn-info btn-xs'

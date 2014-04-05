@@ -9,6 +9,10 @@ class RenterDecorator < Draper::Decorator
     h.number_to_currency(object.amount, precision: 0, unit: '$')
   end
 
+  def amount_grn
+    h.number_to_currency(object.amount_grn, precision: 0, unit: 'гр')
+  end
+
   def email
     h.icon_tag('envelope') + ' ' + h.mail_to(object.email)
   end
@@ -26,11 +30,11 @@ class RenterDecorator < Draper::Decorator
   end
 
   def check_in
-    h.l(object.check_in, format: :short)
+    h.content_tag(:span, h.l(object.check_in, format: :check), class: 'label label-success')
   end
 
   def check_out
-    object.check_out && h.l(object.check_out, format: :short)
+    object.check_out && h.content_tag(:span, h.l(object.check_out, format: :check), class: 'label label-default')
   end
 
   def created_at

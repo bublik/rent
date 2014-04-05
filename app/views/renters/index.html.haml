@@ -1,15 +1,17 @@
 .renters
-%table.table.table-striped
-  %thead
-    %tr
-      %th= sortable "town", "Город"
-      %th= sortable "updated_at", "Дата пуб/ред"
-      %th.room_and_price
-        = sortable "rooms", "Комнат"
-        \/
-        = sortable "amount", "Цена"
-      %th= sortable "check_in", "Проживание"
-      %th Tel/email
-      %th Описание
-      %th
-  = render @renters
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= sortable "town", "Город"
+        %th= sortable "updated_at", "Дата пуб/ред"
+        %th.room_and_price
+          = sortable "rooms", "Комнат"
+          \/
+          = sortable "amount", "Цена"
+        %th= sortable "check_in", "Проживание"
+        %th Tel/email
+        %th Описание
+        %th
+    = render @renters
+
+= paginate @renters

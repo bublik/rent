@@ -10,12 +10,13 @@ class RentersController < ApplicationController
     @renters = Renter.order(sort_column + " " + sort_direction)
 
     if user_signed_in?
-      @renters = current_user.renters if current_user.has_role?(:manager)
+      @renters = current_user.renters.order(sort_column + " " + sort_direction) if current_user.has_role?(:manager)
       @renters = @renters.hide_inactive if current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor)
       @renters = @renters.with_order(current_user) if params[:with_order].eql?('true')
     else
       @renters = @renters.last24h.hide_inactive
     end
+    @renters = @renters.page(params[:page]).per(10)
   end
 
   # GET /renters/1
@@ -113,6 +114,6 @@ class RentersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def renter_params
-    params.require(:renter).permit(:phone, :email, :guard_time, :town, :rooms, :amount, :check_in, :check_out, :description)
+    params.require(:renter).permit(:phone, :email, :guard_time, :town, :rooms, :amount, :amount_grn, :check_in, :check_out, :description)
   end
 end

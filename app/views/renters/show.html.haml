@@ -9,9 +9,11 @@
         %li.active
           %a{href: '#'}
             = renter.rooms
-            %span.badge.pull-right= renter.amount
+            %span.badge.pull-right
+              = renter.amount
+              = renter.amount_grn
 
-    .col-md-2
+    .col-md-3
       - if can?(:show, renter.object)
         .phone
           = renter.phone
@@ -36,13 +38,13 @@
         = renter.check_in
         \-
         = renter.check_out
-
+      .mtop10
+        Обновлено:
+        = renter.updated_at
   .row
     .col-md-6.mtop10.text-muted.small
       %em= renter.description(action_name)
-  %div.mtop10
-    Обновлено:
-    = renter.updated_at
+
 - if current_user.has_role?(:admin)
   .row
     .col-md-12

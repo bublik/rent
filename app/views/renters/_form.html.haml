@@ -1,16 +1,17 @@
 = simple_form_for(@renter) do |f|
   = f.error_notification
   .row
-    = f.input :phone
-    = f.input :email
-    = f.input :town
-    = f.input :rooms
-    = f.input :amount
-    = f.input :check_in
-    = f.input :check_out
+    = f.input :phone, placeholder: 'Телефон'
+    = f.input :email, placeholder: 'Email'
+    = f.input :town, placeholder: 'Город'
+    = f.input :rooms, placeholder: 'комнат'
+    = f.input :amount, placeholder: 'цена в USD'
+    = f.input :amount_grn, placeholder: 'цена в UAH'
+    = f.input :check_in, placeholder: 'дата заезда'
+    = f.input :check_out, placeholder: 'дата выезда'
     - if current_user.has_role?(:admin)
       = f.input :guard_time
-    = f.input :description, as: :text
+    = f.input :description, as: :text, placeholder: 'Не обязательно'
 
   .row
     .col-md-2.col-md-offset-4.mtop10

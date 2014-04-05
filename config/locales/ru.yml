@@ -245,6 +245,7 @@ ru:
       default: ! '%a, %d %b %Y, %H:%M:%S %z'
       long: ! '%d %B %Y, %H:%M'
       short: ! '%d %B, %H:%M'
+      check: ! '%d %B'
     pm: вечера
   activerecord:
     models:
@@ -272,7 +273,8 @@ ru:
         guard_time: Скрывать до
         town: Город
         rooms: Комнат
-        amount: Цена $
+        amount: Цена USD
+        amount_grn: Цена UAH
         check_in: Время заселения
         check_out: Время выезда
         description: Описание
@@ -283,3 +285,9 @@ ru:
         create: "Добавить"
         submit: "Сохранить"
         update: "Обновить"
+  views:
+    pagination:
+      first: Первая
+      previous: Предыдущая
+      last: Последняя
+      next: Следующая
