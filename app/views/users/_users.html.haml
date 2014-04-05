@@ -9,7 +9,7 @@
           - if @role.eql?('manager')
             %th Объявлений
           - elsif !@role.eql?('admin')
-            %th Оплачено
+            %th Доступно просмотров
             %th Просмотрено
           %th Описание
           %th Роль
@@ -24,8 +24,10 @@
               %td= user.renters_count
             - elsif !@role.eql?('admin')
               %td
-                = user.free_orders
-                = link_to(icon_tag('plus'), "#balance-options-#{user.id}", "data-toggle" => "modal", class: 'btn btn-xs btn-warning')
+                = form_for user, :url => user_path(user), html: {method: :put, remote: true, class: 'form-inline free_orders' } do |f|
+                  = link_to(icon_tag('minus'), user_path(user, 'user[order]' => 'minus'), method: :put, remote: true, class: 'btn btn-xs btn-warning minus')
+                  = f.text_field :free_orders, class: 'form-control'
+                  = link_to(icon_tag('plus'), user_path(user, 'user[order]' => 'plus'), method: :put, remote: true, class: 'btn btn-xs btn-warning plus')
               %td= user.orders_count
             %td= user.description
             %td

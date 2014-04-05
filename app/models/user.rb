@@ -49,6 +49,9 @@ class User < ActiveRecord::Base
   scope :subscribers, -> { where(subscribe: true) }
   scope :has_role, lambda{|role| includes(:roles).where(:roles => { :name=>  role})}
 
+  attr_accessor :order
+  validates_numericality_of :free_orders, greater_than_or_equal_to: 0, only_integer: true,  allow_nil: false
+
   before_save :disable_subscription, if: -> { self.has_role?(:manager) }
 
   def disable_subscription

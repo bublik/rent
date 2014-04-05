@@ -10,16 +10,3 @@
         .modal-footer
           = f.submit "Изменить роль", :class => "btn btn-warning"
           %a.btn{"data-dismiss" => "modal", :href => "#"} Закрыть
-
-.modal{:id => "balance-options-#{user.id}", :style => "display: none;"}
-  = simple_form_for user, :url => user_path(user), :html => {:method => :put, :class => 'form-horizontal' } do |f|
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %a.close{"data-dismiss" => "modal"} ×
-          %h3 Изменение баланса
-        .modal-body
-          = f.input :free_orders
-        .modal-footer
-          = f.submit "Изменить баланс", :class => "btn btn-warning"
-          %a.btn{"data-dismiss" => "modal", :href => "#"} Закрыть

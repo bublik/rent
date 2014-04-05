@@ -41,11 +41,21 @@ class UsersController < ApplicationController
 
   def update
     authorize! :update, @user, :message => 'Вы не авторизированы как администратор.'
-    if @user.update_attributes(user_params)
-      redirect_to :back, :notice => "Пользователь изменен!"
-    else
-      logger.debug(@user.errors.full_messages.inspect)
-      redirect_to :back, :alert => "Невозможно изменить пользователя."
+    if order = user_params.delete('order')
+      logger.debug(order)
+      order.eql?('plus') ? @user.increment(:free_orders) : @user.decrement(:free_orders)
+    end
+
+    @user.attributes = user_params
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to :back, :notice => "Пользователь изменен!" }
+        format.js { flash.now[:notice] = 'Данные изменены'}
+      else
+        errors = @user.errors.full_messages.join(',')
+        format.html { redirect_to :back, :alert => "Невозможно изменить пользователя." }
+        format.js { flash.now[:alert] = errors }
+      end
     end
   end
 
@@ -70,6 +80,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :phone, :description, :subscribe, :current_password, :role_ids, :free_orders, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :phone, :description, :subscribe, :current_password, :role_ids,
+                                 :order, :free_orders, :password, :password_confirmation)
   end
 end
