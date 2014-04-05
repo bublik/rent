@@ -16,6 +16,9 @@ class RentersController < ApplicationController
     else
       @renters = @renters.last24h.hide_inactive
     end
+    if params[:check_in].present?
+      @renters = @renters.check_in_from(Date.parse(params[:check_in]))
+    end
     @renters = @renters.page(params[:page]).per(10)
   end
 

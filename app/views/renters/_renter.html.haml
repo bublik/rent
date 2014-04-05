@@ -12,7 +12,7 @@
             = renter.amount
             = renter.amount_grn
   %td
-    %span{ data: {toggle: 'tooltip', placement: 'top', title: 'Заезд/Выезд'}}
+    %span{ data: {toggle: 'tooltip', placement: 'top', title: 'Заезд / Выезд'}}
       %div #{renter.check_in} #{renter.check_out}
   %td
     - if can?(:show, renter.object)

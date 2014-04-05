@@ -15,3 +15,11 @@
 .mtop10 {
   margin-top: 10px;
 }
+
+.role_hint {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  z-index: 10000;
+}

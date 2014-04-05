@@ -1,4 +1,8 @@
-%nav.navbar.navbar-default.navbar-fixed-top
+%nav.navbar.navbar-default
+  .role_hint
+    - current_user.roles.pluck(:name).each do |role|
+      %a
+        %span.label.label-primary #{role}
   .container
     .navbar-header
       %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
@@ -10,9 +14,16 @@
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
         = render 'layouts/navigation_links'
-      - if user_signed_in? && Rails.env.development?
-        %ul.nav.navbar-nav.navbar-right
-          %li
-            - current_user.roles.pluck(:name).each do |role|
-              %a
-                %span.label.label-primary #{role}
+      - if user_signed_in?
+        %form.navbar-form.navbar-left{action: '/', role: 'search'}
+          %span#date_picker.form-group{title: 'Выберите дату заселения', data: { placement: 'left'} }
+            = text_field_tag(:check_in, params[:check_in], class: 'form-control add-on', autocomplete: 'off', data:{format: "yyyy-MM-dd"}, placeholder: 'Выберите дату заселения')
+          = submit_tag('Найти', class: 'btn btn-success')
+
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li= link_to 'Профиль', edit_user_registration_path
+          %li= link_to 'Выйти', destroy_user_session_path, :method=>'delete'
+        - else
+          %li= link_to 'Регистрация', new_user_registration_path
+          %li= link_to 'Войти', new_user_session_path
