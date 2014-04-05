@@ -1,5 +1,5 @@
 class RentersController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
   before_action :set_renter, only: [:show, :edit, :update, :destroy]
   before_action :create_order, only: [:show]
@@ -8,9 +8,14 @@ class RentersController < ApplicationController
   # GET /renters.json
   def index
     @renters = Renter.order(sort_column + " " + sort_direction)
-    @renters = current_user.renters if current_user.has_role?(:manager)
-    @renters = @renters.hide_inactive if current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor)
-    @renters = @renters.with_order(current_user) if params[:with_order].eql?('true')
+
+    if user_signed_in?
+      @renters = current_user.renters if current_user.has_role?(:manager)
+      @renters = @renters.hide_inactive if current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor)
+      @renters = @renters.with_order(current_user) if params[:with_order].eql?('true')
+    else
+      @renters = @renters.last24h.hide_inactive
+    end
   end
 
   # GET /renters/1

@@ -280,6 +280,6 @@ ru:
   helpers:
     submit:
       renter:
-        create: "Добавить %{model}"
-        submit: "Сохранить %{model}"
-        update: "Обновить %{model}"
+        create: "Добавить"
+        submit: "Сохранить"
+        update: "Обновить"

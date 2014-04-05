@@ -9,9 +9,9 @@
       = f.input :email, :required => true
       = f.input :subscribe, hint: 'Получать письма с новыми объявлениями'
       = f.input :description, as: :text
-
-      = f.input :free_orders, disabled: true
-      = f.input :orders_count, disabled: true
+      - if resource.has_role?(:realtor) || resource.has_role?(:vip_realtor)
+        = f.input :free_orders, disabled: true
+        = f.input :orders_count, disabled: true
 
       -#= f.input :password, :autocomplete => "off", :hint => "оставьте пустым если не хотите изменять", :required => false
       -#= f.input :password_confirmation, :required => false

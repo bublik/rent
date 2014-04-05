@@ -28,6 +28,7 @@ class Renter < ActiveRecord::Base
 
   scope :newest, -> { order('updated_at DESC') }
   scope :hide_inactive, -> { where('check_out >= ?', Time.now) }
+  scope :last24h, -> { where('created_at >= ?', Time.now - 24.hour) }
   scope :with_order, -> (user) { joins(:orders).where('orders.user_id =? ', user.id) }
 
   after_initialize :preset
@@ -42,7 +43,7 @@ class Renter < ActiveRecord::Base
   end
 
   def send_notification
-    User.subscribers.each do |user|
+    User.with_role(:admin).subscribers.each do |user|
       Notifications.new_renter(user, self).deliver
     end
   end

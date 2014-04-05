@@ -1,6 +1,6 @@
 Rent::Application.routes.draw do
 
-  root :to => "home#index"
+  root :to => "renters#index"
 
   devise_for :users, :controllers => {:registrations => "registrations"}
 

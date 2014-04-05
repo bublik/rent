@@ -26,7 +26,7 @@ class RenterDecorator < Draper::Decorator
   end
 
   def check_out
-    h.l(object.check_out, format: :short)
+    object.check_out && h.l(object.check_out, format: :short)
   end
 
   def created_at
