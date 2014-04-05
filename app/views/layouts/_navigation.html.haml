@@ -1,8 +1,9 @@
 %nav.navbar.navbar-default
-  .role_hint
-    - current_user.roles.pluck(:name).each do |role|
-      %a
-        %span.label.label-primary #{role}
+  - if user_signed_in?
+    .role_hint
+      - current_user.roles.pluck(:name).each do |role|
+        %a
+          %span.label.label-primary #{role}
   .container
     .navbar-header
       %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}

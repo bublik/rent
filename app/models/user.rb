@@ -47,6 +47,8 @@ class User < ActiveRecord::Base
   has_many :renters
   has_many :orders
   scope :subscribers, -> { where(subscribe: true) }
+  scope :has_role, lambda{|role| includes(:roles).where(:roles => { :name=>  role})}
+
   before_save :disable_subscription, if: -> { self.has_role?(:manager) }
 
   def disable_subscription

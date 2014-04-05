@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   def index
     authorize! :index, @user, :message => 'Вы не авторизированы как администратор.'
     @role = params[:role]
-    @users = User.with_role(@role)
+
+    @users = User.has_role(@role)
 
     respond_to do |format|
       format.html {}
