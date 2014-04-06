@@ -1,3 +1,12 @@
-Notifications#access_to_renter
+Амдинистор выслал Вам новое объявление
 
-= @greeting + ", find me in app/views/notifications/access_to_renter.text.haml"
+Город: #{@renter.town}
+Комнат: #{@renter.rooms}
+- unless @renter.amount.blank?
+  Цена: #{@renter.amount}
+- unless @renter.amount_grn.blank?
+  Цена: #{@renter.amount_grn}
+
+Будет доступно остальным: #{@renter.published_at}
+
+= link_to('Подробней узнать', renter_url(@renter))

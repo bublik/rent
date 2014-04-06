@@ -4,6 +4,7 @@ ruby '2.1.1'
 gem 'rails', '4.0.4'
 #gem 'pg'
 gem 'mysql2'
+gem 'state_machine'
 
 gem 'therubyracer'
 gem 'sass-rails', '~> 4.0.2'

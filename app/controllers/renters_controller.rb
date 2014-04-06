@@ -1,7 +1,7 @@
 class RentersController < ApplicationController
   before_filter :authenticate_user!, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
-  before_action :set_renter, only: [:show, :edit, :update, :destroy]
+  before_action :set_renter, only: [:show, :edit, :update, :destroy, :publish]
   before_action :create_order, only: [:show]
 
   # GET /renters
@@ -11,11 +11,14 @@ class RentersController < ApplicationController
 
     if user_signed_in?
       @renters = current_user.renters.order(sort_column + " " + sort_direction) if current_user.has_role?(:manager)
-      @renters = @renters.hide_inactive if current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor)
-      @renters = @renters.with_order(current_user) if params[:with_order].eql?('true')
+      if current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor)
+        @renters = params[:with_order].eql?('true') ? @renters.with_order(current_user) : @renters.published
+        @renters = @renters.hide_inactive
+      end
     else
       @renters = @renters.last24h.hide_inactive
     end
+
     if params[:check_in].present?
       @renters = @renters.check_in_from(Date.parse(params[:check_in]))
     end
@@ -28,16 +31,17 @@ class RentersController < ApplicationController
   end
 
   def grant_access
-    if (order = Order.where(user_id: params[:user_id], renter_id: params[:id]).first) && order.destroy
-      state = 'removed'
+    state = if (order = Order.where(user_id: params[:user_id], renter_id: params[:id]).first) && order.destroy
+      'removed'
     else
-      state = 'created' if Order.create!(user_id: params[:user_id], renter_id: params[:id], skip_payment: true)
+      'created' if order = Order.create!(user_id: params[:user_id], renter_id: params[:id], skip_payment: true)
     end
 
     respond_to do |format|
       format.js {
         case state
           when 'created'
+            Notifications.access_to_renter(order.user, order.renter).deliver
             render text: "$('.realtors #user_#{params[:user_id]} .btn').addClass('btn-success');"
           when 'removed'
             render text: "$('.realtors #user_#{params[:user_id]} .btn').removeClass('btn-success');"
@@ -69,6 +73,19 @@ class RentersController < ApplicationController
         format.html { render action: 'new' }
         format.json { render json: @renter.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def publish
+    @renter.publish
+    @renter.published_at = Time.now + params[:time].to_i.hours
+    @renter.save
+
+    notice = "Запись будет опубликована #{l(@renter.published_at, format: :short)}."
+
+    respond_to do |format|
+      format.html { redirect_to @renter, notice: notice }
+      format.js { flash.now[:notice] = notice }
     end
   end
 

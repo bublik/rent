@@ -270,7 +270,7 @@ ru:
       renter:
         phone: Телефон
         email: Email
-        guard_time: Скрывать до
+        guard_time: Платное до
         town: Город
         rooms: Комнат
         amount: Цена USD

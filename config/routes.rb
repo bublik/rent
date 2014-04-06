@@ -19,6 +19,7 @@ Rent::Application.routes.draw do
   resources :renters do
     member do
       get 'grant_access/:user_id', action: :grant_access, as: :grant_access
+      get 'publish/:time', action: :publish, as: :publish
     end
   end
 

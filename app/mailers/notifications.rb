@@ -8,10 +8,10 @@ class Notifications < ActionMailer::Base
     mail to: user.email, subject: "[#{renter.town}] Новое объявление"
   end
 
-  # TODO
-  def access_to_renter
-    @greeting = "Hi"
+  def access_to_renter(user, renter)
+    @user = user
+    @renter = renter.decorate
 
-    mail to: "to@example.org"
+    mail to: user.email, subject: "[#{renter.town}] Горячее объявление!"
   end
 end
