@@ -24,6 +24,7 @@ gem 'simple_form'
 gem 'draper', '~> 1.3'
 gem 'capistrano', require: false
 gem 'rvm1-capistrano3', require:  false
+gem 'figaro'
 
 group :development do
   gem 'letter_opener'

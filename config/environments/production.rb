@@ -69,28 +69,27 @@ Rent::Application.configure do
   # the I18n.default_locale when a translation can not be found).
   config.i18n.fallbacks = true
 
-  # Send deprecation notices to registered listeners.
-  config.active_support.deprecation = :notify
-
-  #config.action_mailer.smtp_settings = {
-  #  address: "smtp.gmail.com",
-  #  port: 587,
-  #  domain: ENV["DOMAIN_NAME"],
-  #  authentication: "plain",
-  #  enable_starttls_auto: true,
-  #  user_name: ENV["GMAIL_USERNAME"],
-  #  password: ENV["GMAIL_PASSWORD"]
-  #}
-  # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'clubweb.com.ua' }
-  config.action_mailer.delivery_method = :sendmail
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = false
-
-
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # Send deprecation notices to registered listeners.
+  config.active_support.deprecation = :notify
+
+  # ActionMailer Config
+  config.action_mailer.default_url_options = { :host => 'clubweb.com.ua' }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :enable_starttls_auto => true,
+      :address => "smtp.mandrillapp.com",
+      :port => 587,
+      :domain => "clubweb.com.ua",
+      :authentication => :login,
+      :user_name => ENV['MANDRILL_USERNAME'],
+      :password => ENV['MANDRILL_APIKEY']
+  }
 end
