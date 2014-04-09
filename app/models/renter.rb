@@ -32,10 +32,12 @@ class Renter < ActiveRecord::Base
   scope :check_in_from, -> (date) { where('check_in >= ?', date) }
   scope :last24h, -> { where('created_at >= ?', Time.now - 24.hour) }
   scope :with_order, -> (user) { joins(:orders).where('orders.user_id =? ', user.id) }
-  scope :published, -> { where('state = ? AND  published_at < ?', 'published', Time.now)}
+  scope :published, -> { where('state = ? AND  published_at < ?', 'published', Time.now) }
 
   after_initialize :preset
   after_create :send_notification
+  after_create :check_autoconformation
+
 
   def preset
     self.guard_time ||= Time.now + 4.hours
@@ -49,6 +51,13 @@ class Renter < ActiveRecord::Base
 
   def create_order(user)
     Order.find_or_create_by(user_id: user.id, renter_id: self.id)
+  end
+
+  def check_autoconformation
+    if (setting = Setting.first) && setting.autoopen
+      self.update_column(:published_at, Time.now + setting.autoopen_interval.to_i.minutes)
+      self.publish
+    end
   end
 
   def send_notification

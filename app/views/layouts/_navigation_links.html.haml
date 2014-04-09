@@ -5,3 +5,4 @@
     %li= link_to 'Новое объявл.', new_renter_path
   - if  current_user.has_role?(:admin)
     %li= link_to 'Пользователи', users_path
+    %li= link_to 'Настройки', settings_path

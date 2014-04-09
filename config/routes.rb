@@ -15,7 +15,6 @@ Rent::Application.routes.draw do
     #end
   end
 
-  resources :orders
   resources :renters do
     member do
       get 'grant_access/:user_id', action: :grant_access, as: :grant_access
@@ -23,4 +22,6 @@ Rent::Application.routes.draw do
     end
   end
 
+  resources :orders
+  resources :settings
 end

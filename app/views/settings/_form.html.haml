@@ -1,0 +1,12 @@
+.row
+  .col-md-6
+    = simple_form_for(@setting) do |f|
+      = f.error_notification
+
+      .form-inputs
+        = f.input :autoopen #, hint: 'объявления будет опубликованы автоматически'
+        = f.input :autoopen_interval, hint: 'объявление будет публичным'
+
+      .row
+        .col-md-6.col-md-offset-4
+          = submit_tag 'Обновить', class: 'btn btn-success'

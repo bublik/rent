@@ -5,7 +5,7 @@
     .h5= renter.town
     - if renter.new?
       %span.label.label-warning{ data: {toggle: 'tooltip', placement: 'top', title: 'Ожидает публикации админом'}} new
-    - if current_user.has_role?(:admin) && renter.published? && (renter.published_at > Time.now)
+    - if user_signed_in? && current_user.has_role?(:admin) && renter.published? && (renter.object.published_at > Time.now)
       %span.label.label-danger{ data: {toggle: 'tooltip', placement: 'top', title: 'Будет публичным'}}= renter.published_at(:shorter)
 
   %td= renter.updated_at

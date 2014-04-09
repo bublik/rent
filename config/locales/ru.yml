@@ -254,6 +254,9 @@ ru:
         one: "Съемщик"
         other: "Съемщики"
     attributes:
+      setting:
+        autoopen: 'Автоматически подтверждать'
+        autoopen_interval: 'Интервал подтверждения (мин)'
       user:
         email: 'Email'
         username: 'ФИО'
