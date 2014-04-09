@@ -1,7 +1,13 @@
 - renter = renter.decorate
 
 %tr.text-info.renter{'data-url' => renter_path(renter)}
-  %td.h5= renter.town
+  %td
+    .h5= renter.town
+    - if renter.new?
+      %span.label.label-warning{ data: {toggle: 'tooltip', placement: 'top', title: 'Ожидает публикации админом'}} new
+    - if current_user.has_role?(:admin) && renter.published? && (renter.published_at > Time.now)
+      %span.label.label-danger{ data: {toggle: 'tooltip', placement: 'top', title: 'Будет публичным'}}= renter.published_at(:shorter)
+
   %td= renter.updated_at
   %td
     %ul.nav.nav-pills.nav-stacked
@@ -28,10 +34,10 @@
   %td.text-muted.description.small
     %em= renter.description(action_name)
   %td
-    .btn-group
-      - if user_signed_in?
-        - if !current_user.has_role?(:manager)
-          = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
+    - if user_signed_in?
+      - if !current_user.has_role?(:manager)
+        = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
+      .btn-group
         - if can?(:edit, renter.object)
           = link_to icon_tag('wrench', 'Изменить'), edit_renter_path(renter), class: 'btn btn-info btn-xs'
         - if can?(:delete, renter.object)

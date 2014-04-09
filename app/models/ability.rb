@@ -12,7 +12,7 @@ class Ability
     can :update, User, {id: user.id}
 
     if user.has_role? :manager
-      can :manage, Renter, {user_id: user.id}
+      can [:read, :create, :update], Renter, {user_id: user.id}
     end
 
     if user.has_role? :realtor

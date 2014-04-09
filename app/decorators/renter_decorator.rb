@@ -45,7 +45,7 @@ class RenterDecorator < Draper::Decorator
     h.l(object.updated_at, format: :short)
   end
 
-  def published_at
-    h.l(object.published_at, format: :short)
+  def published_at(format = :short)
+    h.l(object.published_at, format: format)
   end
 end

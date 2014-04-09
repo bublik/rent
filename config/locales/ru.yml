@@ -245,6 +245,7 @@ ru:
       default: ! '%a, %d %b %Y, %H:%M:%S %z'
       long: ! '%d %B %Y, %H:%M'
       short: ! '%d %B, %H:%M'
+      shorter: ! '%d %b %H:%M'
       check: ! '%d %B'
     pm: вечера
   activerecord:
