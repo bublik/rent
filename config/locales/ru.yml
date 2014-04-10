@@ -168,8 +168,8 @@ ru:
   number:
     currency:
       format:
-        delimiter: ! ' '
-        format: ! '%n %u'
+        delimiter: ! '.'
+        format: ! '%n%u'
         precision: 2
         separator: ','
         significant: false
@@ -277,6 +277,7 @@ ru:
         guard_time: Платное до
         town: Город
         rooms: Комнат
+        people: 'Человек'
         amount: Цена USD
         amount_grn: Цена UAH
         check_in: Время заселения

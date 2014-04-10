@@ -2,7 +2,9 @@
   %h2 Поступило новое объявление
   %div Город: #{@renter.town}
   %div Комнат: #{@renter.rooms}
+  %div Человек: #{@renter.people}
   %div Цена: #{@renter.amount}
   %div Цена: #{@renter.amount_grn}
+
   %br/
   %div= link_to('Опубликовать или выслать доступ', renter_url(@renter))

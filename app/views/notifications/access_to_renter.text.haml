@@ -2,6 +2,8 @@
 
 Город: #{@renter.town}
 Комнат: #{@renter.rooms}
+- unless @renter.people.blank?
+  Человек: #{@renter.people}
 - unless @renter.amount.blank?
   Цена: #{@renter.amount}
 - unless @renter.amount_grn.blank?

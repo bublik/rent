@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140409175757) do
+ActiveRecord::Schema.define(version: 20140410163527) do
 
   create_table "orders", force: true do |t|
     t.integer  "user_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140409175757) do
     t.integer  "amount_grn"
     t.string   "state"
     t.datetime "published_at"
+    t.integer  "people"
   end
 
   create_table "roles", force: true do |t|
