@@ -18,7 +18,7 @@
       - if user_signed_in?
         %form.navbar-form.navbar-left{action: '/', role: 'search'}
           %span#date_picker.form-group{title: 'Выберите дату заселения', data: { placement: 'left'} }
-            = text_field_tag(:check_in, params[:check_in], class: 'form-control add-on', autocomplete: 'off', data:{format: "yyyy-MM-dd"}, placeholder: 'Выберите дату заселения')
+            = text_field_tag(:check_in, params[:check_in], class: 'form-control add-on', autocomplete: 'off', data:{format: "dd-MM-yyyy"}, placeholder: 'Выберите дату заселения')
           = submit_tag('Найти', class: 'btn btn-success')
 
       %ul.nav.navbar-nav.navbar-right
