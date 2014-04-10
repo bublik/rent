@@ -1,6 +1,6 @@
 class SettingsController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_setting, only: [:show, :edit, :update, :destroy]
+  before_action :set_setting, only: [:show, :for_assign, :grant_access, :edit, :update, :destroy]
 
   ## GET /settings
   ## GET /settings.json
@@ -37,6 +37,27 @@ class SettingsController < ApplicationController
   #    end
   #  end
   #end
+
+  def grant_access
+    state = if @setting.users.include?(params[:user_id]) && @setting.users = @setting.users - [params[:user_id]]
+      'removed'
+    else
+      'created' if @setting.users << params[:user_id]
+    end
+    @setting.save
+
+    respond_to do |format|
+      format.js {
+        render text: "$('.realtors #user_#{params[:user_id]} .btn').#{state.eql?('created') ? 'addClass' : 'removeClass' }('btn-success');"
+      }
+    end
+  end
+
+  def for_assign
+    @users = User.with_role(params[:role])
+    @assigned_user_ids = @setting.users.map(&:to_i)
+    logger.debug(@assigned_user_ids.inspect)
+  end
 
   # PATCH/PUT /settings/1
   # PATCH/PUT /settings/1.json

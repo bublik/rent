@@ -41,7 +41,6 @@ class Renter < ActiveRecord::Base
   after_create :send_notification
   after_create :check_autoconformation
 
-
   def preset
     self.guard_time ||= Time.now + 4.hours
   end
@@ -60,6 +59,13 @@ class Renter < ActiveRecord::Base
     if (setting = Setting.first) && setting.autoopen
       self.update_column(:published_at, Time.now + setting.autoopen_interval.to_i.minutes)
       self.publish
+
+      setting.users.each do |user_id|
+        if order = Order.create!(user_id: user_id, renter_id: self.id, skip_payment: true)
+          Notifications.access_to_renter(order.user, order.renter).deliver
+        end
+      end
+
     end
   end
 

@@ -59,8 +59,8 @@
         %dt
           Выслать доступ
         %dd
-          = link_to('VIP Маклера', for_assign_users_path(role: 'vip_realtor', renter_id: @renter.id), remote: true, class: 'btn btn-xs btn-warning')
-          = link_to('Маклера', for_assign_users_path(role: 'realtor', renter_id: @renter.id), remote: true, class: 'btn btn-xs btn-primary')
+          = link_to('VIP Маклера', for_assign_users_path(role: 'vip_realtor', renter_id: @renter.id), disable_with: 'loading..', remote: true, class: 'btn btn-xs btn-warning')
+          = link_to('Маклера', for_assign_users_path(role: 'realtor', renter_id: @renter.id), disable_with: 'loading..', remote: true, class: 'btn btn-xs btn-primary')
         .col-md-4
       .realtors
     .col-md-6

@@ -54,6 +54,7 @@ class RentersController < ApplicationController
       format.js {
         case state
           when 'created'
+            # TODO refactor this code (duplicated with model)
             Notifications.access_to_renter(order.user, order.renter).deliver
             render text: "$('.realtors #user_#{params[:user_id]} .btn').addClass('btn-success');"
           when 'removed'

@@ -23,5 +23,14 @@ Rent::Application.routes.draw do
   end
 
   resources :orders
-  resources :settings
+  resources :settings do
+    collection do
+      get 'for_assign/:role', action: :for_assign, as: :for_assign
+    end
+
+    member do
+      get 'grant_access/:user_id', action: :grant_access, as: :grant_access
+    end
+  end
+
 end
