@@ -21,7 +21,7 @@ class Renter < ActiveRecord::Base
   belongs_to :user, counter_cache: true
   has_many :orders
 
-  validates :user_id, :phone, :email, :town, :rooms, presence: true
+  validates :user_id, :phone, :rooms, presence: true
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create}
   validates :amount, numericality: true, allow_nil: true
   validates :amount_grn, numericality: true, allow_nil: true
