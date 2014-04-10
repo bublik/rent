@@ -22,16 +22,19 @@
     %span{ data: {toggle: 'tooltip', placement: 'top', title: 'Заезд / Выезд'}}
       %div #{renter.check_in} #{renter.check_out}
   %td
-    - if can?(:show, renter.object)
-      .phone
-        = renter.phone
-      .email
-        = renter.email
+    - if user_signed_in?
+      - if can?(:show, renter.object)
+        .phone
+          = renter.phone
+        .email
+          = renter.email
+      - else
+        %span.label.label-danger оплатите информацию
+        .text-muted
+          = icon_tag('eye-close')
+          = renter.guard_time
     - else
-      %span.label.label-danger оплатите информацию
-      .text-muted
-        = icon_tag('eye-close')
-        = renter.guard_time
+      = link_to('Открыть', renter_path(renter), class: 'btn btn-success btn-xs')
   %td.text-muted.description.small
     %em= renter.description(action_name)
   %td
