@@ -13,7 +13,8 @@
         = f.input :free_orders, disabled: true
         = f.input :orders_count, disabled: true
 
-      -#= f.input :password, :autocomplete => "off", :hint => "оставьте пустым если не хотите изменять", :required => false
-      -#= f.input :password_confirmation, :required => false
+      = f.input :password, :autocomplete => "off", :hint => "оставьте пустым если не хотите изменять", :required => false
+      = f.input :password_confirmation, :required => false
       -#= f.input :current_password, :hint => "введите текущий пароль для подтверждения изменений", :required => true
+
       = f.button :submit, 'Сохранить', :class => 'btn-primary'

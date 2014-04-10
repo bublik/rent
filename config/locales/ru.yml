@@ -262,7 +262,7 @@ ru:
         username: 'ФИО'
         name: 'ФИО'
         password: 'Пароль'
-        password_confirmation: 'Подтверждение пароля'
+        password_confirmation: 'Повторите пароль'
         current_password: 'Текущий пароль'
         phone: 'Телефон'
         description: 'О себе'
