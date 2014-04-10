@@ -46,18 +46,22 @@ class UsersController < ApplicationController
       order.eql?('plus') ? @user.increment(:free_orders) : @user.decrement(:free_orders)
     end
 
-    if user_params['password'].present? &&  user_params['password'].eql?(user_params['password_confirmation'])
-      @user.update(user_params)
+    if user_params['password'].present?
+      if @user.update(user_params)
+        sign_in @user, :bypass => true
+      end
     else
-      @user.attributes = user_params
+      update_params = user_params.dup
+      update_params.delete('password')
+      update_params.delete('password_confirmation')
+      @user.attributes = update_params
     end
 
 
     respond_to do |format|
       if @user.save
-        sign_in @user, :bypass => true
         format.html { redirect_to :back, :notice => "Пользователь изменен!" }
-        format.js { flash.now[:notice] = 'Данные изменены'}
+        format.js { flash.now[:notice] = 'Данные изменены' }
       else
         errors = @user.errors.full_messages.join(',')
         format.html { redirect_to :back, :alert => "Невозможно изменить пользователя. #{errors}" }
