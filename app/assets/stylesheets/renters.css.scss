@@ -34,9 +34,9 @@ th .current {
 }
 
 th .asc {
-  background-image: url(/assets/up_arrow.gif);
+  background-image: image-url('up_arrow.gif');
 }
 
 th .desc {
-  background-image: url(/assets/down_arrow.gif);
+  background-image: image-url('down_arrow.gif');
 }
