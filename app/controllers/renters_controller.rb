@@ -15,6 +15,9 @@ class RentersController < ApplicationController
         @renters = params[:with_order].eql?('true') ? @renters.with_order(current_user) : @renters.published
         @renters = @renters.hide_inactive
       end
+      if params[:state].present?
+        @renters = @renters.by_state(params[:state])
+      end
     else
       @renters = @renters.last24h.hide_inactive.published
     end

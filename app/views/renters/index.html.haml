@@ -1,4 +1,11 @@
 .renters
+  - if user_signed_in? && current_user.has_role?(:admin)
+    .row
+      .col-md-3
+        = link_to('Модерированные', renters_path(state: 'published'), class: 'btn btn-info')
+        = link_to('Новые', renters_path(state: 'new'), class: 'btn btn-default')
+      .col-md-3
+
   %table.table.table-striped
     %thead
       %tr
