@@ -31,6 +31,16 @@ class RentersController < ApplicationController
   # GET /renters/1
   # GET /renters/1.json
   def show
+    if user_signed_in?
+      access = Access.where(renter_id: params[:id], user_id: current_user.id).first ||
+          Access.create(renter_id: params[:id], user_id: current_user.id)
+
+      access.increment!(:counter)
+
+      @accesses = @renter.accesses.joins(:user)
+      @order_user_ids = @renter.orders.pluck(:user_id)
+    end
+
   end
 
   def grant_access
@@ -128,7 +138,7 @@ class RentersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_renter
     @renter = Renter.find(params[:id])
-    @renter = current_user.renters.find(params[:id]) if current_user.has_role?(:manager)
+    @renter = current_user.renters.find_by_id(params[:id]) if current_user.has_role?(:manager)
   end
 
   def create_order

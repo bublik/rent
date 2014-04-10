@@ -47,17 +47,37 @@
       %em= renter.description(action_name)
 
 - if current_user.has_role?(:admin)
-  %dl.dl-horizontal
-    %dt Публиковать через
-    %dd
-      = link_to('Сейчас', publish_renter_path(renter, 0), remote: true, class: 'btn btn-xs btn-info')
-      = link_to('Через 1час', publish_renter_path(renter, 1), remote: true, class: 'btn btn-xs btn-info')
-      = link_to('Через 2часа', publish_renter_path(renter, 2), remote: true, class: 'btn btn-xs btn-info')
-      = link_to('Через 3часа', publish_renter_path(renter, 3), remote: true, class: 'btn btn-xs btn-info')
-    %dt
-      Выслать доступ
-    %dd
-      = link_to('VIP Маклера', for_assign_users_path(role: 'vip_realtor', renter_id: @renter.id), remote: true, class: 'btn btn-xs btn-warning')
-      = link_to('Маклера', for_assign_users_path(role: 'realtor', renter_id: @renter.id), remote: true, class: 'btn btn-xs btn-primary')
-    .col-md-4
-  .realtors
+  .row
+    .col-md-6
+      %dl.dl-horizontal
+        %dt Публиковать через
+        %dd
+          = link_to('Сейчас', publish_renter_path(renter, 0), remote: true, class: 'btn btn-xs btn-info')
+          = link_to('Через 1час', publish_renter_path(renter, 1), remote: true, class: 'btn btn-xs btn-info')
+          = link_to('Через 2часа', publish_renter_path(renter, 2), remote: true, class: 'btn btn-xs btn-info')
+          = link_to('Через 3часа', publish_renter_path(renter, 3), remote: true, class: 'btn btn-xs btn-info')
+        %dt
+          Выслать доступ
+        %dd
+          = link_to('VIP Маклера', for_assign_users_path(role: 'vip_realtor', renter_id: @renter.id), remote: true, class: 'btn btn-xs btn-warning')
+          = link_to('Маклера', for_assign_users_path(role: 'realtor', renter_id: @renter.id), remote: true, class: 'btn btn-xs btn-primary')
+        .col-md-4
+      .realtors
+    .col-md-6
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Пользователь
+            %th Оплата
+            %th Просмотры
+        - @accesses.decorate.each do |access|
+          %tr
+            %td= access.user
+            %td
+              - if @order_user_ids.include?(access.user_id)
+                %span.label.label-success оплатил
+              - else
+                \-
+            %td= access.counter
+
+

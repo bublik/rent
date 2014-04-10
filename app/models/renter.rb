@@ -20,6 +20,8 @@
 class Renter < ActiveRecord::Base
   belongs_to :user, counter_cache: true
   has_many :orders
+  has_many :accesses
+  has_many :users, through: :accsesses
 
   validates :user_id, :phone, :rooms, presence: true
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create}

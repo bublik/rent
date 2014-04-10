@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140410163527) do
+ActiveRecord::Schema.define(version: 20140410175812) do
+
+  create_table "accesses", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "renter_id"
+    t.integer  "counter"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "accesses", ["renter_id"], name: "index_accesses_on_renter_id", using: :btree
+  add_index "accesses", ["user_id"], name: "index_accesses_on_user_id", using: :btree
 
   create_table "orders", force: true do |t|
     t.integer  "user_id"
