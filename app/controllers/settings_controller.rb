@@ -91,6 +91,6 @@ class SettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def setting_params
-      params.require(:setting).permit(:autoopen, :autoopen_interval)
+      params.require(:setting).permit(:autoopen, :autoopen_interval, :guard_time)
     end
 end

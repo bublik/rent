@@ -58,6 +58,7 @@ class Renter < ActiveRecord::Base
   def check_autoconformation
     if (setting = Setting.first) && setting.autoopen
       self.update_column(:published_at, Time.now + setting.autoopen_interval.to_i.minutes)
+      self.update_column(:guard_time, Time.now + setting.guard_time.to_i.minutes)
       self.publish
 
       setting.users.each do |user_id|
@@ -65,7 +66,6 @@ class Renter < ActiveRecord::Base
           Notifications.access_to_renter(order.user, order.renter).deliver
         end
       end
-
     end
   end
 

@@ -6,6 +6,7 @@
       .form-inputs
         = f.input :autoopen #, hint: 'объявления будет опубликованы автоматически'
         = f.input :autoopen_interval, hint: 'будет публичным'
+        = f.input :guard_time, hint: 'будет платным после публикации'
       .form-group
         .col-md-4
           %label Выдавать доступ

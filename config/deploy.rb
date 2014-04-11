@@ -10,6 +10,7 @@ set :repo_url, 'git@github.com:bublik/rent.git'
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/home/clubweb/site'
+set :rails_env, 'production'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -57,3 +58,10 @@ namespace :deploy do
   end
 
 end
+
+after "deploy", "deploy:symlink_config_files"
+after "deploy", "deploy:migrate"
+after "deploy", "deploy:compile_assets"
+
+after "deploy", "deploy:restart"
+after "deploy", "deploy:cleanup"

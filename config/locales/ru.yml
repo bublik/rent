@@ -257,6 +257,7 @@ ru:
       setting:
         autoopen: 'Автоматически подтверждать'
         autoopen_interval: 'Интервал подтверждения (мин)'
+        guard_time: 'Платный интервал'
       user:
         email: 'Email'
         username: 'ФИО'
