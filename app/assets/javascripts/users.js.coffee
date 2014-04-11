@@ -11,4 +11,6 @@ $ ->
     e.stopPropagation()
 
   $('#users a:first').trigger('click')
+  $('.container').delegate ".free_orders_field", "focusout", ()->
+    $(this).parent().submit()
 

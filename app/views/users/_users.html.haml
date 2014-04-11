@@ -26,7 +26,7 @@
               %td
                 = form_for user, :url => user_path(user), html: {method: :put, remote: true, class: 'form-inline free_orders' } do |f|
                   = link_to(icon_tag('minus'), user_path(user, 'user[order]' => 'minus'), method: :put, remote: true, class: 'btn btn-xs btn-warning minus')
-                  = f.text_field :free_orders, class: 'form-control'
+                  = f.text_field :free_orders, class: 'form-control free_orders_field'
                   = link_to(icon_tag('plus'), user_path(user, 'user[order]' => 'plus'), method: :put, remote: true, class: 'btn btn-xs btn-warning plus')
               %td= user.orders_count
             %td= user.description
