@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411162208) do
+ActiveRecord::Schema.define(version: 20140411165509) do
 
   create_table "accesses", force: true do |t|
     t.integer  "user_id"
@@ -46,13 +46,14 @@ ActiveRecord::Schema.define(version: 20140411162208) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id",      default: 1, null: false
-    t.integer  "orders_count", default: 0, null: false
+    t.integer  "user_id",      default: 1,     null: false
+    t.integer  "orders_count", default: 0,     null: false
     t.datetime "check_out"
     t.integer  "amount_grn"
     t.string   "state"
     t.datetime "published_at"
     t.integer  "people"
+    t.boolean  "has_emailed",  default: false, null: false
   end
 
   create_table "roles", force: true do |t|

@@ -16,6 +16,10 @@ Rent::Application.routes.draw do
   end
 
   resources :renters do
+    collection do
+      get 'notify'
+    end
+
     member do
       get 'grant_access/:user_id', action: :grant_access, as: :grant_access
       get 'publish/:time', action: :publish, as: :publish

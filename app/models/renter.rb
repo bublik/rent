@@ -36,10 +36,11 @@ class Renter < ActiveRecord::Base
   scope :last24h, -> { where('created_at >= ?', Time.now - 24.hour) }
   scope :with_order, -> (user) { joins(:orders).where('orders.user_id =? ', user.id) }
   scope :published, -> { where('state = ? AND  published_at < ?', 'published', Time.now) }
+  scope :not_emailed, -> { where('has_emailed = ?', false) }
 
   after_initialize :preset
-  after_create :send_notification
-  after_create :check_autoconformation
+  after_create :new_message_notification
+  after_create :check_autoconfirmation
 
   def preset
     self.guard_time ||= Time.now + 4.hours
@@ -55,7 +56,24 @@ class Renter < ActiveRecord::Base
     Order.find_or_create_by(user_id: user.id, renter_id: self.id)
   end
 
-  def check_autoconformation
+  # находим все сообщения которые в статусе published и больше чем published_at
+  # разсылаем письма и блокируем для повторной отсылки
+  def self.inform_new_paid_renters
+
+    published.not_emailed.each do |renter|
+      renter.update_column(:has_emailed, true)
+
+      # Найдем всех рэлторов которые должны получить письма о новом платном объявлении
+      order_user_ids = renter.orders.pluck(:user_id)
+      User.where('users.id NOT IN (?)', order_user_ids).with_any_role(:realtor, :vip_realtor).each do |user|
+        Notifications.new_public_renter(user, renter).deliver
+      end
+      #пометим как уже отработанное
+    end
+
+  end
+
+  def check_autoconfirmation
     if (setting = Setting.first) && setting.autoopen
       self.update_column(:published_at, Time.now + setting.autoopen_interval.to_i.minutes)
       self.update_column(:guard_time, Time.now + setting.guard_time.to_i.minutes)
@@ -69,7 +87,7 @@ class Renter < ActiveRecord::Base
     end
   end
 
-  def send_notification
+  def new_message_notification
     User.with_role(:admin).subscribers.each do |user|
       Notifications.new_renter(user, self).deliver
     end

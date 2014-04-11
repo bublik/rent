@@ -90,6 +90,11 @@ class RentersController < ApplicationController
     end
   end
 
+  def notify
+    Renter.inform_new_paid_renters
+    render text: 'OK'
+  end
+
   def publish
     @renter.publish
     @renter.published_at = Time.now + params[:time].to_i.hours

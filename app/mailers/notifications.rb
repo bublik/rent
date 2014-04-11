@@ -14,4 +14,12 @@ class Notifications < ActionMailer::Base
 
     mail to: user.email, subject: "[#{renter.town}] Горячее объявление!"
   end
+
+  def new_public_renter(user, renter)
+    @user = user
+    @renter = renter.decorate
+
+    mail to: user.email, subject: "[#{renter.town}] Новое объявление"
+  end
+
 end

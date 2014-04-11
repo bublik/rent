@@ -1,10 +1,16 @@
-Rent
-========================
+##################
+#  Rent service
+##################
 
-This application was generated with the rails_apps_composer gem:
-https://github.com/RailsApps/rails_apps_composer
-provided by the RailsApps Project:
-http://railsapps.github.io/
+##################
+#  Cron
+##################
+
+to avoid create baskgroud jobs
+we need call every 5 minutes
+for send emails about new announcing to realtors.
+
+*/5 * * * * wget http://hostname/renters/notify
 
 ________________________
 
