@@ -59,9 +59,7 @@ namespace :deploy do
 
 end
 
-after "deploy", "deploy:symlink_config_files"
-after "deploy", "deploy:migrate"
 after "deploy", "deploy:compile_assets"
-
-after "deploy", "deploy:restart"
 after "deploy", "deploy:cleanup"
+after "deploy", "deploy:migrate"
+after "deploy", "deploy:restart"
