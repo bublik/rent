@@ -17,6 +17,8 @@
         = render 'layouts/navigation_links'
       - if user_signed_in?
         %form.navbar-form.navbar-left{action: '/', role: 'search'}
+          = hidden_field_tag(:sort, 'check_in')
+          = hidden_field_tag(:direction, 'asc')
           %span#date_picker.form-group{title: 'Выберите дату заселения', data: { placement: 'left'} }
             = text_field_tag(:check_in, params[:check_in], class: 'form-control add-on', autocomplete: 'off', data:{format: "dd-MM-yyyy"}, placeholder: 'Выберите дату заселения')
           = submit_tag('Найти', class: 'btn btn-success')
