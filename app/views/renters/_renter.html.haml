@@ -40,7 +40,14 @@
   %td
     - if user_signed_in?
       - if !current_user.has_role?(:manager)
-        = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
+        - if can?(:show, renter.object)
+          = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
+        - else
+          = link_to 'Открыть', '#', class: 'btn btn-success btn-xs',
+            data: {container: "body", toggle: "popover", placement: "left",
+            content: "Нулевой баланс, обратитесь к администратору."}
+
+
       .btn-group
         - if can?(:edit, renter.object)
           = link_to icon_tag('wrench', 'Изменить'), edit_renter_path(renter), class: 'btn btn-info btn-xs'
