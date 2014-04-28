@@ -18,7 +18,8 @@ class Ability
     if user.has_role? :realtor
       can :show, Renter do |renter|
         renter.guard_time < Time.now ||
-        renter.orders.where('user_id = ?', user.id).count.eql?(1)
+          renter.orders.where('user_id = ?', user.id).count.eql?(1) ||
+          user.free_orders > 0
       end
     end
 
@@ -26,7 +27,8 @@ class Ability
     if user.has_role? :vip_realtor
       can :show, Renter do |renter|
         renter.guard_time < Time.now ||
-        renter.orders.where('user_id = ?', user.id).count.eql?(1)
+          renter.orders.where('user_id = ?', user.id).count.eql?(1) ||
+          user.free_orders > 0
       end
     end
 

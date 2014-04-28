@@ -24,7 +24,7 @@ class Renter < ActiveRecord::Base
   has_many :users, through: :accsesses
 
   validates :user_id, :phone, :rooms, presence: true
-  validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create}
+  validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}, allow_blank: true
   validates :amount, numericality: true, allow_nil: true
   validates :amount_grn, numericality: true, allow_nil: true
   validates :rooms, numericality: true
