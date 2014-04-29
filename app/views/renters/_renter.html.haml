@@ -23,12 +23,10 @@
       %div #{renter.check_in} #{renter.check_out}
   %td
     - if user_signed_in?
-      - if can?(:show, renter.object) && renter.orders.where(user_id: current_user.id).count.eql?(1)
-        .phone
-          = renter.phone
-        .email
-          = renter.email
-      - else
+      - if can?(:show, renter.object)
+        .phone= renter.phone
+        .email= renter.email
+      - elsif can?(:buy, renter.object)
         %span.label.label-danger откройте информацию
         .text-muted
           = icon_tag('eye-close')
@@ -40,7 +38,7 @@
   %td
     - if user_signed_in?
       - if !current_user.has_role?(:manager)
-        - if can?(:show, renter.object)
+        - if can?(:buy, renter.object)
           = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
         - else
           = link_to 'Открыть', '#', class: 'btn btn-success btn-xs',

@@ -12,23 +12,27 @@ class Ability
     can :update, User, {id: user.id}
 
     if user.has_role? :manager
-      can [:read, :create, :update], Renter, {user_id: user.id}
+      can [:read, :create, :update, :buy], Renter, {user_id: user.id}
     end
 
     if user.has_role? :realtor
       can :show, Renter do |renter|
-        renter.guard_time < Time.now ||
-          renter.orders.where('user_id = ?', user.id).count.eql?(1) ||
-          user.free_orders > 0
+        renter.guard_time < Time.now || renter.orders.where('user_id = ?', user.id).count.eql?(1)
+      end
+
+      can :buy, Renter do |renter|
+        user.free_orders > 0
       end
     end
 
 
     if user.has_role? :vip_realtor
       can :show, Renter do |renter|
-        renter.guard_time < Time.now ||
-          renter.orders.where('user_id = ?', user.id).count.eql?(1) ||
-          user.free_orders > 0
+        renter.guard_time < Time.now || renter.orders.where('user_id = ?', user.id).count.eql?(1)
+      end
+
+      can :buy, Renter do |renter|
+        user.free_orders > 0
       end
     end
 
