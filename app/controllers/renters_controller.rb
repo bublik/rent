@@ -132,6 +132,13 @@ class RentersController < ApplicationController
     end
   end
 
+  def check_duplicate
+    renter = Renter.where(phone: params['phone']).last
+    if renter
+      flash[:notice] = "Последняя запись с таким телефоном была добавлена #{l(renter.created_at, format: :short)}"
+    end
+  end
+
   private
   def sort_column
     Renter.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"

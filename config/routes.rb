@@ -19,6 +19,7 @@ Rent::Application.routes.draw do
   resources :renters do
     collection do
       get 'notify'
+      get 'check_duplicate'
     end
 
     member do

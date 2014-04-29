@@ -13,3 +13,5 @@ $ ->
 
   $('#date_picker').datetimepicker({ language: 'ru', pickTime: false}).on 'changeDate', (ev) ->
     $('#date_picker').datetimepicker('hide')
+  $('#renter_phone').blur ->
+    $.getScript( "/renters/check_duplicate.js?phone="+$(this).val() )
