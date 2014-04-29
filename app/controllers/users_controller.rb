@@ -57,10 +57,13 @@ class UsersController < ApplicationController
       @user.attributes = update_params
     end
 
-
     respond_to do |format|
       if @user.save
-        format.html { redirect_to :back, :notice => "Пользователь изменен!" }
+        if @user.errors.blank? && @user.previous_changes.keys.include?('unconfirmed_email')
+          email_description = 'Емейл пользователя будет изменен после верификации емейла по ссылке в письме.'
+        end
+
+        format.html { redirect_to :back, :notice => "Пользователь изменен! #{email_description}" }
         format.js { flash.now[:notice] = 'Данные изменены' }
       else
         errors = @user.errors.full_messages.join(',')
