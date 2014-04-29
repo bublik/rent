@@ -1,16 +1,16 @@
 .row
-  .col-md-6
+  .col-md-8
     = simple_form_for(@setting) do |f|
       = f.error_notification
 
       .form-inputs
         = f.input :autoopen #, hint: 'объявления будет опубликованы автоматически'
         = f.input :autoopen_interval, hint: "будет публичным для"
-        = f.input :guard_time, hint: 'будет платным после публикации'
+        = f.input :guard_time, hint: 'будет виден для всех без таймера'
       .row
         .col-md-6.col-md-offset-4
           = submit_tag 'Сохранить', class: 'btn btn-success'
-  .col-md-6{style: 'margin-top: 85px; padding-left: 0;'}
+  .col-md-4{style: 'margin-top: 80px; padding-left: 0;'}
     = link_to('VIP Маклера', for_assign_settings_path(setting_id: @setting.id, role: 'vip_realtor'), disable_with: 'loading..', remote: true, class: 'btn btn-xs btn-warning')
     = link_to('Маклера', for_assign_settings_path(setting_id: @setting.id, role: 'realtor'), disable_with: 'loading..', remote: true, class: 'btn btn-xs btn-primary')
     .realtors
