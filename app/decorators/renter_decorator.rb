@@ -18,11 +18,11 @@ class RenterDecorator < Draper::Decorator
   end
 
   def people
-    object.people && "#{object.people}чел."
+    object.people && "#{object.people}чел"
   end
 
   def rooms
-    "#{object.rooms}ком."
+    "#{object.rooms}ком"
   end
 
   def description(action_name = 'index')

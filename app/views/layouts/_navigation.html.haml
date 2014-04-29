@@ -22,7 +22,8 @@
           %span#date_picker.form-group{title: 'Выберите дату заселения', data: { placement: 'left'} }
             = text_field_tag(:check_in, params[:check_in], class: 'form-control add-on', autocomplete: 'off', data:{format: "dd-MM-yyyy"}, placeholder: 'Выберите дату заселения')
           = submit_tag('Найти', class: 'btn btn-success')
-
+      - else
+        = link_to 'О нас', about_path, class: 'navbar-brand'
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li= link_to 'Профиль', edit_user_registration_path

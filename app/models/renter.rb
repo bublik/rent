@@ -44,6 +44,8 @@ class Renter < ActiveRecord::Base
 
   def preset
     self.guard_time ||= Time.now + 4.hours
+    self.check_in ||= Time.now.change(hour: 13, min: 0, sec: 0)
+    self.check_out ||= Time.now.change(hour: 12, min: 0, sec: 0)
   end
 
   state_machine initial: :new do

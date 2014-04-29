@@ -42,6 +42,11 @@
       .mtop10
         Обновлено:
         = renter.updated_at
+      - if current_user.has_role?(:admin)
+        .row
+          .col-md-6
+            Создано:
+            = renter.user.name
   .row
     .col-md-6.mtop10.text-muted.small
       %em= renter.description(action_name)
