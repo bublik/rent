@@ -23,7 +23,7 @@
       %div #{renter.check_in} #{renter.check_out}
   %td
     - if user_signed_in?
-      - if can?(:show, renter.object)
+      - if can?(:show, renter.object) && renter.orders.where(user_id: current_user.id).count.eql?(1)
         .phone
           = renter.phone
         .email
