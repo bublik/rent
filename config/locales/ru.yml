@@ -256,7 +256,7 @@ ru:
     attributes:
       setting:
         autoopen: 'Автоматически подтверждать'
-        autoopen_interval: 'Интервал подтверждения (мин)'
+        autoopen_interval: 'Интервал активации (мин)'
         guard_time: 'Платный интервал'
       user:
         email: 'Email'
