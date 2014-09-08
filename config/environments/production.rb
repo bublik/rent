@@ -79,7 +79,7 @@ Rent::Application.configure do
   config.active_support.deprecation = :notify
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'clubweb.com.ua' }
+  config.action_mailer.default_url_options = { :host => 'mkc.od.ua' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
@@ -87,7 +87,7 @@ Rent::Application.configure do
       :enable_starttls_auto => true,
       :address => "smtp.mandrillapp.com",
       :port => 587,
-      :domain => "clubweb.com.ua",
+      :domain => "mkc.od.ua",
       :authentication => :login,
       :user_name => ENV['MANDRILL_USERNAME'],
       :password => ENV['MANDRILL_APIKEY']
