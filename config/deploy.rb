@@ -1,7 +1,7 @@
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
-set :application, 'rent'
+set :application, 'clubweb'
 set :repo_url, 'git@github.com:bublik/rent.git'
 #set :rvm_ruby_version, '2.1.1'
 
@@ -11,6 +11,8 @@ set :repo_url, 'git@github.com:bublik/rent.git'
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/home/clubweb/site'
 set :rails_env, 'production'
+
+set :tmp_dir, "/home/clubweb/tmp"
 
 # Default value for :scm is :git
 # set :scm, :git
