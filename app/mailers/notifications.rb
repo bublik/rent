@@ -4,22 +4,22 @@ class Notifications < ActionMailer::Base
   def new_renter(user, renter)
     @user = user
     @renter = renter.decorate
-
-    mail to: user.email, subject: "[#{renter.town}] Новое объявление"
+    @agent = renter.user.name
+    mail to: user.email, subject: "Новое объявление" #[#{renter.town}]
   end
 
   def access_to_renter(user, renter)
     @user = user
     @renter = renter.decorate
 
-    mail to: user.email, subject: "[#{renter.town}] Горячее объявление!"
+    mail to: user.email, subject: "Горячее объявление!" #[#{renter.town}]
   end
 
   def new_public_renter(user, renter)
     @user = user
     @renter = renter.decorate
 
-    mail to: user.email, subject: "[#{renter.town}] Новое объявление"
+    mail to: user.email, subject: "Новое объявление" #[#{renter.town}]
   end
 
 end

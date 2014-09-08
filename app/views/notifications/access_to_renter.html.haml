@@ -1,6 +1,6 @@
 %p
   %h2 Амдинистор выслал Вам новое объявление
-  %div Город: #{@renter.town}
+  -#%div Город: #{@renter.town}
   %div Комнат: #{@renter.rooms}
   - unless @renter.people.blank?
     %div Человек: #{@renter.people}

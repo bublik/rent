@@ -2,19 +2,17 @@
 
 %tr.text-info.renter{'data-url' => renter_path(renter)}
   %td
-    .h5= renter.town
+    = renter.updated_at
     - if renter.new?
       %span.label.label-warning{ data: {toggle: 'tooltip', placement: 'top', title: 'Ожидает публикации админом'}} new
     - if user_signed_in? && current_user.has_role?(:admin) && renter.published? && (renter.object.published_at > Time.now)
       %span.label.label-danger{ data: {toggle: 'tooltip', placement: 'top', title: 'Будет публичным'}}= renter.published_at(:shorter)
-
-  %td= renter.updated_at
   %td
     %ul.nav.nav-pills.nav-stacked
       %li.active
         %a{href: '#'}
-          = renter.rooms
-          = renter.people
+          %span.badge= renter.rooms
+          %span.badge= renter.people
           %span.badge.pull-right
             = renter.amount
             = renter.amount_grn
