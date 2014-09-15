@@ -8,4 +8,5 @@
   %div Цена: #{@renter.amount_grn}
 
   %br/
+  %div Дата публикации: #{@renter.updated_at}
   %div= link_to('Опубликовать или выслать доступ', renter_url(@renter))

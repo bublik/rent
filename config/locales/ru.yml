@@ -246,7 +246,7 @@ ru:
       long: ! '%d %B %Y, %H:%M'
       short: ! '%d %B, %H:%M'
       shorter: ! '%d %b %H:%M'
-      check: ! '%d %B'
+      check: ! '%d %B %Y'
     pm: вечера
   activerecord:
     models:
