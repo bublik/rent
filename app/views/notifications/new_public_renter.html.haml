@@ -4,6 +4,7 @@
   -#%div Город: #{@renter.town}
   %div Дата заезда: #{@renter.check_in}
   %div Комнат: #{@renter.rooms}
+  %div Описание: #{@renter.description}
   - unless @renter.people.blank?
     %div Человек: #{@renter.people}
   - unless @renter.amount.blank?

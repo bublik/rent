@@ -8,6 +8,7 @@
     %div Цена: #{@renter.amount}
   - unless @renter.amount_grn.blank?
     %div Цена: #{@renter.amount_grn}
+  %div Описание: #{@renter.description}
   %div Будет доступно остальным: #{@renter.published_at}
 
   %br/
