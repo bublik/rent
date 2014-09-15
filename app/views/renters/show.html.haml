@@ -76,6 +76,7 @@
             %th Оплата
             %th Просмотры
         - @accesses.decorate.each do |access|
+          - next if access.object.user.is_admin?
           %tr
             %td= access.user
             %td
@@ -84,5 +85,3 @@
               - else
                 \-
             %td= access.counter
-
-
