@@ -279,6 +279,7 @@ ru:
         town: Город
         rooms: Комнат
         people: 'Человек'
+        phone_format: 'Вид телефона'
         amount: Цена USD
         amount_grn: Цена UAH
         check_in: Время заселения

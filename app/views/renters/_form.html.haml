@@ -4,6 +4,7 @@
     = f.input :phone, placeholder: '+380671111111'
     = f.input :email, placeholder: 'Email'
     -#= f.input :town, placeholder: 'Город'
+    = f.input :phone_format, as: :select, collection: [:timer, :last_digits], include_blank: false
     = f.input :rooms, placeholder: 'комнат'
     = f.input :people, placeholder: 'человек'
     = f.input :amount, placeholder: 'цена в USD'

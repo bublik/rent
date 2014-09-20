@@ -5,6 +5,10 @@ class RenterDecorator < Draper::Decorator
     h.icon_tag('phone') + ' ' + h.number_to_phone(object.phone)
   end
 
+  def phone_masked
+    h.icon_tag('phone') + ' ' + h.number_to_phone(mask(object.phone))
+  end
+
   def amount
     h.number_to_currency(object.amount, precision: 0, unit: '$')
   end
@@ -51,5 +55,14 @@ class RenterDecorator < Draper::Decorator
 
   def published_at(format = :short)
     h.l(object.published_at, format: format)
+  end
+
+  private
+  def last_digits(number)
+    number.to_s.length <= 2 ? number : number.to_s.slice(0..-3)
+  end
+
+  def mask(number)
+    "#{last_digits(number)}XX"
   end
 end
