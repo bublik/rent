@@ -25,12 +25,13 @@
         .phone= renter.phone
         .email= renter.email
       - elsif can?(:buy, renter.object)
+        %span.label.label-danger откройте информацию
         - if renter.phone_format.eql?('last_digits')
           .phone= renter.phone_masked
-        %span.label.label-danger откройте информацию
-        .text-muted
-          = icon_tag('eye-close')
-          = renter.guard_time
+        - unless renter.phone_format.eql?('everytime')
+          .text-muted
+            = icon_tag('eye-close')
+            = renter.guard_time
     - else
       - if renter.phone_format.eql?('last_digits')
         .phone= renter.phone_masked

@@ -23,12 +23,13 @@ class Renter < ActiveRecord::Base
   has_many :accesses
   has_many :users, through: :accsesses
 
+  FORMATS = %w(timer last_digits everytime)
   validates :user_id, :phone, :rooms, presence: true
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}, allow_blank: true
   validates :amount, numericality: true, allow_nil: true
   validates :amount_grn, numericality: true, allow_nil: true
   validates :rooms, numericality: true
-  validates :phone_format, inclusion: { in: %w(timer last_digits) }
+  validates :phone_format, inclusion: {in: FORMATS}
 
   scope :newest, -> { order('updated_at DESC') }
   scope :hide_inactive, -> { where('check_in >= ?', Time.now) }

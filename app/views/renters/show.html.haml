@@ -22,9 +22,10 @@
           = renter.email
       - else
         %span.label.label-danger оплатите информацию
-        .text-muted
-          = icon_tag('eye-close')
-          = renter.guard_time
+        - unless renter.phone_format.eql?('everytime')
+          .text-muted
+            = icon_tag('eye-close')
+            = renter.guard_time
     .col-md-3
       .btn-group
         - if can?(:edit, renter.object)

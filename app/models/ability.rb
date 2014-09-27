@@ -17,7 +17,12 @@ class Ability
 
     if user.has_role? :realtor
       can :show, Renter do |renter|
-        renter.guard_time < Time.now || renter.orders.where('user_id = ?', user.id).count.eql?(1)
+        has_order = renter.orders.where('user_id = ?', user.id).count.eql?(1)
+        if !has_order && renter.phone_format.eql?('everytime')
+          false
+        else
+          has_order || renter.guard_time < Time.now
+        end
       end
 
       can :buy, Renter do |renter|
@@ -25,10 +30,14 @@ class Ability
       end
     end
 
-
     if user.has_role? :vip_realtor
       can :show, Renter do |renter|
-        renter.guard_time < Time.now || renter.orders.where('user_id = ?', user.id).count.eql?(1)
+        has_order = renter.orders.where('user_id = ?', user.id).count.eql?(1)
+        if !has_order && renter.phone_format.eql?('everytime')
+          false
+        else
+          has_order || renter.guard_time < Time.now
+        end
       end
 
       can :buy, Renter do |renter|
