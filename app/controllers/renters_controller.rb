@@ -133,7 +133,8 @@ class RentersController < ApplicationController
   end
 
   def check_duplicate
-    renter = Renter.where(phone: params['phone']).last
+    phone =  params['phone'].sub!(/^\s/, '+')
+    renter = Renter.where(phone: phone).last
     if renter
       flash[:notice] = "Последняя запись с таким телефоном была добавлена #{l(renter.created_at, format: :short)}"
     end
