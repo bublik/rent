@@ -47,12 +47,14 @@ class User < ActiveRecord::Base
   has_many :renters
   has_many :orders
   scope :subscribers, -> { where(subscribe: true) }
-  scope :has_role, lambda{|role| includes(:roles).where(:roles => { :name=>  role})}
+  scope :has_role, lambda { |role| includes(:roles).where(:roles => {:name => role}) }
 
   attr_accessor :order
-  validates_numericality_of :free_orders, greater_than_or_equal_to: 0, only_integer: true,  allow_nil: false
+  validates_numericality_of :free_orders, greater_than_or_equal_to: 0, only_integer: true, allow_nil: false
 
   before_save :disable_subscription, if: -> { self.has_role?(:manager) }
+
+  after_create :send_admin_notification
 
   def disable_subscription
     subscribe = false
@@ -63,4 +65,12 @@ class User < ActiveRecord::Base
     self.has_role?(:admin)
   end
 
+  def self.admin
+    admin = User.has_role(:admin).first
+  end
+
+  # inform first admin about new user for more fast verification
+  def send_admin_notification
+    Notifications.send_admin_notification(User.admin, self).deliver
+  end
 end

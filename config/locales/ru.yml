@@ -275,7 +275,7 @@ ru:
       renter:
         phone: Телефон
         email: Email
-        guard_time: Платное до
+        guard_time: Платное до (таймер)
         town: Город
         rooms: Комнат
         people: 'Человек'
