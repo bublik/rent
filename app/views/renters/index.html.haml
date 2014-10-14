@@ -1,10 +1,14 @@
+- content_for :header do
+  <meta http-equiv="refresh" content="20">
 .renters
-  - if user_signed_in? && current_user.has_role?(:admin)
-    .row
-      .col-md-3.btn-group
+  .row
+    .col-md-3.btn-group
+      - if user_signed_in? && current_user.has_role?(:admin)
         = link_to('Модерированные', renters_path(state: 'published'), class: 'btn btn-info ' + (params[:state].eql?('published') ? 'active' : '' ))
         = link_to('Новые', renters_path(state: 'new'), class: 'btn btn-default btn-info ' + (params[:state].eql?('new') ? 'active' : '' ))
-      .col-md-3
+    .col-md-3
+    .col-md-3.col-md-offset-3
+      = link_to(image_tag('refresh.png', width: '25px'), root_path, title: 'Update', class: 'btn pull-right')
 
   %table.table.table-striped.table-condensed
     %thead

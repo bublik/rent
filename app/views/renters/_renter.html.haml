@@ -21,6 +21,8 @@
       %div #{renter.check_in} #{renter.check_out}
   %td
     - if user_signed_in?
+      - if renter.phone_format.eql?('sold')
+        %span.badge Продано
       - if can?(:show, renter.object)
         .phone= renter.phone
         .email= renter.email
@@ -33,21 +35,23 @@
             = icon_tag('eye-close')
             = renter.guard_time
     - else
-      - if renter.phone_format.eql?('last_digits')
-        .phone= renter.phone_masked
-      = link_to('Открыть', renter_path(renter), class: 'btn btn-success btn-xs')
+      - if renter.phone_format.eql?('sold')
+        %span.badge Продано
+      - else
+        - if renter.phone_format.eql?('last_digits')
+          .phone= renter.phone_masked
+        = link_to('Открыть', renter_path(renter), class: 'btn btn-success btn-xs')
   %td.text-muted.description.small
     %em= renter.description(action_name)
   %td
     - if user_signed_in?
       - if !current_user.has_role?(:manager)
-        - if can?(:buy, renter.object)
+        - if can?(:show, renter.object) || (can?(:buy, renter.object) && !renter.phone_format.eql?('sold'))
           = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
-        - else
+        - elsif !renter.phone_format.eql?('sold')
           = link_to 'Открыть', '#', class: 'btn btn-success btn-xs',
             data: {container: "body", toggle: "popover", placement: "left",
             content: "Нулевой баланс, обратитесь к администратору."}
-
 
       .btn-group
         - if can?(:edit, renter.object)
