@@ -1,18 +1,16 @@
 # == Schema Information
 #
-# Table name: accesses
+# Table name: feedbacks
 #
 #  id         :integer          not null, primary key
 #  user_id    :integer
-#  renter_id  :integer
-#  counter    :integer
+#  message    :text
 #  created_at :datetime
 #  updated_at :datetime
 #
 
-class Access < ActiveRecord::Base
+class Feedback < ActiveRecord::Base
   belongs_to :user
-  belongs_to :renter
-  validates_uniqueness_of :renter_id, scope: :user_id
+  validates_presence_of :message
 
 end

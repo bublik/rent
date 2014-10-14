@@ -1,17 +1,16 @@
 # == Schema Information
 #
-# Table name: accesses
+# Table name: feedbacks
 #
 #  id         :integer          not null, primary key
 #  user_id    :integer
-#  renter_id  :integer
-#  counter    :integer
+#  message    :text
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 require 'spec_helper'
 
-describe Access do
+describe Feedback do
   pending "add some examples to (or delete) #{__FILE__}"
 end

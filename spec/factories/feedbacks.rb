@@ -1,11 +1,10 @@
 # == Schema Information
 #
-# Table name: accesses
+# Table name: feedbacks
 #
 #  id         :integer          not null, primary key
 #  user_id    :integer
-#  renter_id  :integer
-#  counter    :integer
+#  message    :text
 #  created_at :datetime
 #  updated_at :datetime
 #
@@ -13,9 +12,8 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :access do
-    user nil
-    renter nil
-    counter 1
+  factory :feedback do
+    references ""
+    message "MyText"
   end
 end

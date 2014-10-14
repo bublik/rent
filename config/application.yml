@@ -10,3 +10,4 @@
 #
 MANDRILL_USERNAME: Your_Username
 MANDRILL_APIKEY: Your_API_Key
+ADMIN_EMAIL: 'rebisall@gmail.com'

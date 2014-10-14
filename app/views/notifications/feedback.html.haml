@@ -1,0 +1,8 @@
+%h2 Обратная связь
+- if @feedback.user
+  %div Имя #{@feedback.user.name}
+  %div Телефон #{@feedback.user.phone}
+  %div Емейл #{@feedback.user.email}
+%hr/
+%code
+  = @feedback.message

@@ -9,12 +9,19 @@
 #  town         :string(255)
 #  rooms        :integer
 #  amount       :integer
-#  сheck_in     :datetime
-#  description  :string(255)
+#  check_in     :datetime
+#  description  :text
 #  created_at   :datetime
 #  updated_at   :datetime
 #  user_id      :integer          default(1), not null
 #  orders_count :integer          default(0), not null
+#  check_out    :datetime
+#  amount_grn   :integer
+#  state        :string(255)
+#  published_at :datetime
+#  people       :integer
+#  has_emailed  :boolean          default(FALSE), not null
+#  phone_format :string(255)      default("timer")
 #
 
 class Renter < ActiveRecord::Base

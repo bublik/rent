@@ -33,6 +33,7 @@
 #  orders_count           :integer          default(0), not null
 #  renters_count          :integer          default(0), not null
 #  free_orders            :integer          default(0), not null
+#  subscribe              :boolean          default(TRUE), not null
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

@@ -26,4 +26,9 @@ class Notifications < ActionMailer::Base
     @user = user
     mail to: admin.email, subject: "Новый пользователь зарегистрировался" #[#{renter.town}]
   end
+
+  def feedback(feedback, admin)
+    @feedback = feedback
+    mail to: admin.email, subject: "Обратная связь" #[#{renter.town}]
+  end
 end

@@ -1,0 +1,15 @@
+%h3 Если у Вас возникли вопросы или пожелания, можете связаться снами
+%h4 Емейл: #{@user.email}
+%h4 Телефон: #{@user.phone}
+
+
+= simple_form_for(@feedback, url: administration_path, html: { method: :post }) do |f|
+  = f.input :message, required: true, placeholder: 'Напишите Ваши пожелания.', autofocus: true, label: false, input_html: {rows: 6}
+  .row
+    .col-md-6
+      %br/
+      &nbsp;&nbsp;&nbsp;
+      = f.button :submit, "Отправить", :class => 'button right'
+:css
+  .has-error .help-inline {float: left}
+
