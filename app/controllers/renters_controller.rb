@@ -19,7 +19,7 @@ class RentersController < ApplicationController
         @renters = @renters.by_state(params[:state])
       end
     else
-      @renters = @renters.last24h.hide_inactive.published
+      @renters = @renters.hide_inactive.published
     end
 
     if params[:check_in].present?
