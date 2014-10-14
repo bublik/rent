@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   validates_numericality_of :free_orders, greater_than_or_equal_to: 0, only_integer: true, allow_nil: false
 
   before_save :disable_subscription, if: -> { self.has_role?(:manager) }
-
+  before_save :check_auth_token
   after_create :send_admin_notification
 
   def disable_subscription
@@ -73,5 +73,9 @@ class User < ActiveRecord::Base
   # inform first admin about new user for more fast verification
   def send_admin_notification
     Notifications.send_admin_notification(User.admin, self).deliver
+  end
+
+  def check_auth_token
+    self.auth_token = SecureRandom.uuid.gsub('-','').upcase if self.auth_token.blank?
   end
 end

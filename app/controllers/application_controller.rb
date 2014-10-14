@@ -7,7 +7,14 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
-  #before_filter :log_action
+  before_filter :autologin
+  private
+  def autologin
+    if !user_signed_in? && params[:token]
+      user = User.find_by_auth_token(params[:token])
+      sign_in user
+    end
+  end
   #
   #def log_action
   #  logger.debug(action_name.inspect)

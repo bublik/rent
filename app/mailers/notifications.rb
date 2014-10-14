@@ -24,6 +24,7 @@ class Notifications < ActionMailer::Base
 
   def send_admin_notification(admin, user)
     @user = user
+    @admin = admin
     mail to: admin.email, subject: "Новый пользователь зарегистрировался" #[#{renter.town}]
   end
 

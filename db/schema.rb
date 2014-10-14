@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014180828) do
+ActiveRecord::Schema.define(version: 20141014184327) do
 
   create_table "accesses", force: true do |t|
     t.integer  "user_id"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20141014180828) do
     t.integer  "renters_count",          default: 0,    null: false
     t.integer  "free_orders",            default: 0,    null: false
     t.boolean  "subscribe",              default: true, null: false
+    t.string   "auth_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
