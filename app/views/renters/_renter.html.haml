@@ -39,7 +39,7 @@
               = icon_tag('eye-close')
               = renter.guard_time
     - else
-      - if renter.phone_format.eql?('sold')
+      - if renter.phone_format.eql?('sold') || renter.expired?
         %span.badge Продано
       - else
         - if renter.phone_format.eql?('last_digits')

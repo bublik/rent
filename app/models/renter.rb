@@ -67,6 +67,9 @@ class Renter < ActiveRecord::Base
     Order.find_or_create_by(user_id: user.id, renter_id: self.id)
   end
 
+  def expired?
+    self.check_in < Time.now
+  end
   # находим все сообщения которые в статусе published и больше чем published_at
   # разсылаем письма и блокируем для повторной отсылки
   def self.inform_new_paid_renters
