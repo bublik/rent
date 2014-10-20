@@ -3,6 +3,7 @@
     = simple_form_for(@user, url: user_path(@user), :html => {method: :put, class: 'form-vertical' }) do |f|
       = f.input :name, :autofocus => true
       = f.input :email, :required => true
+      = f.input :phone
       = f.input :free_orders
       = f.input :description, as: :text
 

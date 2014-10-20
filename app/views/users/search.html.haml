@@ -1,0 +1,21 @@
+= render 'users/search'
+.row.h4
+  .col-xs-2 Имя
+  .col-xs-2 Емейл
+  .col-xs-2 Тел.
+  .col-xs-2 Ордеров
+  .col-xs-2 Описание
+  .col-xs-2 Управление
+
+- @users.each do |user|
+  .row
+    .col-xs-2= user.name
+    .col-xs-2= user.email
+    .col-xs-2= user.phone
+    .col-xs-2= user.orders_count
+    .col-xs-2= user.description
+    .col-xs-2
+      = link_to(content_tag(:span, 'Изменить', class: 'glyphicon glyphicon-wrench'), edit_user_path(user), :class => 'btn btn-xs btn-warning')
+      = link_to(content_tag(:span, 'Удалить', class: 'glyphicon glyphicon-remove'), user_path(user), :data => { :confirm => "Вы уверены?" }, :method => :delete, :class => 'btn btn-xs btn-warning') unless user == current_user
+  %hr
+

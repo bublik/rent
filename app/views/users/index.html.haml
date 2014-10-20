@@ -1,5 +1,4 @@
-.text-right
-  = link_to('Новый пользователь', new_user_path, class: 'btn btn-success btn-xs')
+= render 'users/search'
 %ul#users.nav.nav-tabs
   %li= link_to('Новые', '#new', data: {toggle: 'tab', targer: users_path(format: :js) })
   %li= link_to('Риэлторы', '#realtor',  data: {toggle: 'tab', targer: users_path(format: :js, role: 'realtor')})

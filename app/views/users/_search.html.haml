@@ -1,0 +1,8 @@
+.row
+  .col-xs-5.col-xs-offset-3
+    = form_for(User.new, url: search_users_path, html: { role: 'search', class: 'navbar-form navbar-left'})  do
+      %span#date_picker.form-group{title: 'Емейл', data: { placement: 'left'} }
+        = text_field_tag(:email, params[:email], class: 'form-control add-on', autocomplete: 'off', placeholder: 'Введите емейл')
+      = submit_tag('Найти', class: 'btn btn-success')
+  .col-xs-2.navbar-form
+    = link_to('Новый пользователь', new_user_path, class: 'btn btn-success')

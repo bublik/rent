@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def search
+    @users = User.where(['email LIKE ?', "%#{params[:email]}%"])
+  end
+
   def new
     @user = User.new
   end
