@@ -10,7 +10,7 @@ class HomeController < ApplicationController
   end
 
   def administration
-    @feedback = Feedback.new(params[:feedback].permit!)
+    @feedback = Feedback.new(params[:feedback] ? params[:feedback].permit! : {})
     @feedback.user = current_user
 
     @user = User.find_by_email(ENV['ADMIN_EMAIL'])

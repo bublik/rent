@@ -26,7 +26,7 @@ class Ability
       end
 
       can :buy, Renter do |renter|
-        user.free_orders > 0
+        user.free_orders > 0 && !renter.phone_format.eql?('sold')
       end
     end
 
@@ -41,7 +41,7 @@ class Ability
       end
 
       can :buy, Renter do |renter|
-        user.free_orders > 0
+        user.free_orders > 0 && !renter.phone_format.eql?('sold')
       end
     end
 

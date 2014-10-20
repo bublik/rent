@@ -23,17 +23,21 @@
     - if user_signed_in?
       - if renter.phone_format.eql?('sold')
         %span.badge Продано
-      - if can?(:show, renter.object)
-        .phone= renter.phone
-        .email= renter.email
-      - elsif can?(:buy, renter.object)
-        %span.label.label-danger откройте информацию
-        - if renter.phone_format.eql?('last_digits')
-          .phone= renter.phone_masked
-        - unless renter.phone_format.eql?('everytime')
-          .text-muted
-            = icon_tag('eye-close')
-            = renter.guard_time
+        - if can?(:show, renter.object)
+          .phone= renter.phone
+          .email= renter.email
+      - else
+        - if can?(:show, renter.object)
+          .phone= renter.phone
+          .email= renter.email
+        - elsif can?(:buy, renter.object)
+          %span.label.label-danger откройте информацию
+          - if renter.phone_format.eql?('last_digits')
+            .phone= renter.phone_masked
+          - unless renter.phone_format.eql?('everytime')
+            .text-muted
+              = icon_tag('eye-close')
+              = renter.guard_time
     - else
       - if renter.phone_format.eql?('sold')
         %span.badge Продано
