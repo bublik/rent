@@ -18,7 +18,7 @@ require 'capistrano/deploy'
 require 'rvm1/capistrano3'
 require 'capistrano/bundler'
 require 'capistrano/rails'
-#require 'capistrano/rails/migrations'
+require 'capistrano/rails/migrations'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
