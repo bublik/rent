@@ -63,10 +63,19 @@ class Renter < ActiveRecord::Base
     event :publish do
       transition :new => :published
     end
+    event :sale do
+      transition :published => :sold
+    end
   end
 
   def create_order(user)
-    Order.find_or_create_by(user_id: user.id, renter_id: self.id)
+    check_max_sales if Order.find_or_create_by(user_id: user.id, renter_id: self.id) && !user.is_admin?
+  end
+
+  def check_max_sales
+    if (self.max_sales.to_i > 0) && (self.orders_count >= self.max_sales)
+      self.sale
+    end
   end
 
   def expired?

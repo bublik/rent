@@ -9,6 +9,7 @@
     = f.input :people, placeholder: 'человек'
     = f.input :amount, placeholder: 'цена в USD'
     = f.input :amount_grn, placeholder: 'цена в UAH'
+    = f.input :max_sales, placeholder: 'введите число продаж (объявление будет помечено как продано)'
     = f.input :check_in, placeholder: 'дата заезда'
     = f.input :check_out, placeholder: 'дата выезда'
     - if current_user.has_role?(:admin)

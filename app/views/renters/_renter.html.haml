@@ -21,7 +21,7 @@
       %div #{renter.check_in} #{renter.check_out}
   %td
     - if user_signed_in?
-      - if renter.phone_format.eql?('sold')
+      - if renter.phone_format.eql?('sold') || renter.sold?
         %span.badge Продано
         - if can?(:show, renter.object)
           .phone= renter.phone
@@ -39,7 +39,7 @@
               = icon_tag('eye-close')
               = renter.guard_time
     - else
-      - if renter.phone_format.eql?('sold') || renter.expired?
+      - if renter.phone_format.eql?('sold') || renter.expired? || renter.sold?
         %span.badge Продано
       - else
         - if renter.phone_format.eql?('last_digits')

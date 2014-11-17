@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117165033) do
+ActiveRecord::Schema.define(version: 20141117183857) do
 
   create_table "accesses", force: true do |t|
     t.integer  "user_id"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20141117165033) do
     t.boolean  "has_emailed",  default: false,   null: false
     t.string   "phone_format", default: "timer"
     t.integer  "town_id"
+    t.integer  "max_sales"
   end
 
   create_table "roles", force: true do |t|

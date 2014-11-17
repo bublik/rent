@@ -282,6 +282,7 @@ ru:
         phone_format: 'Вид телефона'
         amount: Цена USD
         amount_grn: Цена UAH
+        max_sales: 'Число продаж'
         check_in: Время заселения
         check_out: Время выезда
         description: Описание
