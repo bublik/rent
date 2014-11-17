@@ -26,6 +26,8 @@
 
 class Renter < ActiveRecord::Base
   belongs_to :user, counter_cache: true
+  belongs_to :town
+
   has_many :orders
   has_many :accesses
   has_many :users, through: :accsesses

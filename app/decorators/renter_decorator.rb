@@ -1,6 +1,10 @@
 class RenterDecorator < Draper::Decorator
   delegate_all
 
+  def town
+    object.town ? object.town.name : ''
+  end
+
   def phone
     h.icon_tag('phone') + ' ' + h.number_to_phone(object.phone)
   end

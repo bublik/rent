@@ -1,6 +1,8 @@
 class Notifications < ActionMailer::Base
   default(from: '"mkc.od.ua" <noreplay@mkc.od.ua>', return_path: '"mkc.od.ua" <noreplay@mkc.od.ua>')
 
+  helper :application
+
   def new_renter(user, renter)
     @user = user
     @renter = renter.decorate

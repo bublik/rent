@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014184327) do
+ActiveRecord::Schema.define(version: 20141117165033) do
 
   create_table "accesses", force: true do |t|
     t.integer  "user_id"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20141014184327) do
     t.integer  "people"
     t.boolean  "has_emailed",  default: false,   null: false
     t.string   "phone_format", default: "timer"
+    t.integer  "town_id"
   end
 
   create_table "roles", force: true do |t|
@@ -82,6 +83,12 @@ ActiveRecord::Schema.define(version: 20141014184327) do
     t.datetime "updated_at"
     t.string   "users",             default: "--- []\n"
     t.integer  "guard_time",        default: 120
+  end
+
+  create_table "towns", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

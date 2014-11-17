@@ -25,7 +25,12 @@ class RentersController < ApplicationController
     if params[:check_in].present?
       @renters = @renters.check_in_from(Date.parse(params[:check_in]))
     end
+
+    @renters = @renters.where(town_id: params[:town_id] || 1)
     @renters = @renters.page(params[:page]).per(10)
+    @url = params.dup
+    @url.delete(:town_id)
+    @url[:page] = params[:page] || 0
   end
 
   # GET /renters/1
@@ -33,7 +38,7 @@ class RentersController < ApplicationController
   def show
     if user_signed_in?
       access = Access.where(renter_id: params[:id], user_id: current_user.id).first ||
-          Access.create(renter_id: params[:id], user_id: current_user.id)
+        Access.create(renter_id: params[:id], user_id: current_user.id)
 
       access.increment!(:counter)
 
@@ -133,7 +138,7 @@ class RentersController < ApplicationController
   end
 
   def check_duplicate
-    phone =  params['phone'].sub!(/^\s/, '+')
+    phone = params['phone'].sub!(/^\s/, '+')
     renter = Renter.where(phone: phone).last
     if renter
       flash[:notice] = "Последняя запись с таким телефоном была добавлена #{l(renter.created_at, format: :short)}"
@@ -161,6 +166,6 @@ class RentersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def renter_params
-    params.require(:renter).permit(:phone, :email, :phone_format, :guard_time, :town, :rooms, :people, :amount, :amount_grn, :check_in, :check_out, :description)
+    params.require(:renter).permit(:phone, :email, :phone_format, :guard_time, :town_id, :rooms, :people, :amount, :amount_grn, :check_in, :check_out, :description)
   end
 end
