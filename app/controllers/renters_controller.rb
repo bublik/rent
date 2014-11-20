@@ -13,7 +13,7 @@ class RentersController < ApplicationController
       @renters = current_user.renters.order(sort_column + " " + sort_direction) if current_user.has_role?(:manager)
       if current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor)
         @renters = params[:with_order].eql?('true') ? @renters.with_order(current_user) : @renters.published
-        @renters = @renters.hide_inactive
+        #   @renters = @renters.hide_inactive
       end
       if params[:state].present?
         @renters = @renters.by_state(params[:state])
@@ -42,7 +42,7 @@ class RentersController < ApplicationController
 
       access.increment!(:counter)
 
-      @accesses = @renter.accesses.joins(:user)
+      @accesses = Accesses.where(renter_id: @renter.id).joins(:user)
       @order_user_ids = @renter.orders.pluck(:user_id)
     end
 
