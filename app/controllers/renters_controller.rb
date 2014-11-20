@@ -42,7 +42,7 @@ class RentersController < ApplicationController
 
       access.increment!(:counter)
 
-      @accesses = Accesses.where(renter_id: @renter.id).joins(:user)
+      @accesses = Access.where(renter_id: @renter.id).joins(:user)
       @order_user_ids = @renter.orders.pluck(:user_id)
     end
 
