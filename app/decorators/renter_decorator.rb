@@ -58,7 +58,7 @@ class RenterDecorator < Draper::Decorator
   end
 
   def published_at(format = :short)
-    h.l(object.published_at, format: format)
+    object.published_at ? h.l(object.published_at, format: format) : '-'
   end
 
   private
