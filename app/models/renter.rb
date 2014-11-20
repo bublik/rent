@@ -81,6 +81,7 @@ class Renter < ActiveRecord::Base
   def expired?
     self.check_in < Time.now
   end
+
   # находим все сообщения которые в статусе published и больше чем published_at
   # разсылаем письма и блокируем для повторной отсылки
   def self.inform_new_paid_renters
@@ -91,7 +92,11 @@ class Renter < ActiveRecord::Base
       # Найдем всех рэлторов которые должны получить письма о новом платном объявлении
       order_user_ids = renter.orders.pluck(:user_id)
       User.where('users.id NOT IN (?)', order_user_ids).with_any_role(:realtor, :vip_realtor).each do |user|
-        Notifications.new_public_renter(user, renter).deliver
+        begin
+          Notifications.new_public_renter(user, renter).deliver
+        rescue => e
+          Rails.logger.error(e.message)
+        end
       end
       #пометим как уже отработанное
     end
