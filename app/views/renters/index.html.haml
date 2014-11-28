@@ -2,11 +2,13 @@
   <meta http-equiv="refresh" content="20">
 .renters
   .row
-    .col-md-3.col-xs-3.col-sm-3.btn-group
+    .col-md-6.col-xs-6.col-sm-6.btn-group
+      - unless user_signed_in?
+        %h3.text-muted{style: 'margin:0'}
+          %em Наши клиенты ждут вашего звонка!
       - if user_signed_in? && current_user.has_role?(:admin)
         = link_to('Модерированные', renters_path(state: 'published'), class: 'btn btn-info ' + (params[:state].eql?('published') ? 'active' : '' ))
         = link_to('Новые', renters_path(state: 'new'), class: 'btn btn-default btn-info ' + (params[:state].eql?('new') ? 'active' : '' ))
-    .col-md-3.col-xs-3.col-sm-1
     .col-md-3.col-xs-3
       %label.pull-right{style: 'margin-top: 5px'} Ваш город
     .col-md-2.col-xs-2.col-sm-3

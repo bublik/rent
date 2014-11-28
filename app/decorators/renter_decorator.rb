@@ -34,7 +34,7 @@ class RenterDecorator < Draper::Decorator
   end
 
   def description(action_name = 'index')
-    action_name.eql?('index') ? h.truncate(object.description, length: 60) : object.description
+    action_name.eql?('index') ? h.truncate(object.description, length: 90) : object.description
   end
 
   def guard_time
