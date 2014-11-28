@@ -147,7 +147,7 @@ class RentersController < ApplicationController
 
   private
   def sort_column
-    Renter.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+    Renter.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
 
   def sort_direction
