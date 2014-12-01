@@ -2,7 +2,7 @@
 
 %tr.text-info.renter{'data-url' => renter_path(renter)}
   %td
-    = renter.updated_at
+    = renter.created_at
     - if renter.new?
       %span.label.label-warning{ data: {toggle: 'tooltip', placement: 'top', title: 'Ожидает публикации админом'}} new
     - if user_signed_in? && current_user.has_role?(:admin) && renter.published? && (renter.object.published_at > Time.now)
@@ -21,7 +21,7 @@
       %div #{renter.check_in} #{renter.check_out}
   %td
     - if user_signed_in?
-      - if renter.phone_format.eql?('sold') || renter.sold?
+      - if renter.phone_format.eql?('sold') || renter.expired? || renter.sold?
         %span.badge Продано
         - if can?(:show, renter.object)
           .phone= renter.phone

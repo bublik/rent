@@ -46,7 +46,7 @@ class Renter < ActiveRecord::Base
   scope :check_in_from, -> (date) { where('check_in >= ?', date) }
   scope :last24h, -> { where('created_at >= ?', Time.now - 24.hour) }
   scope :with_order, -> (user) { joins(:orders).where('orders.user_id =? ', user.id) }
-  scope :published, -> { where('state = ? AND  published_at < ?', 'published', Time.now) }
+  scope :published, -> { where('state IN (?) AND  published_at < ?', ['published','sold'],  Time.now) }
   scope :not_emailed, -> { where('has_emailed = ?', false) }
 
   after_initialize :preset
