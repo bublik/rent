@@ -299,3 +299,4 @@ ru:
       previous: Предыдущая
       last: Последняя
       next: Следующая
+      truncate: '...'
