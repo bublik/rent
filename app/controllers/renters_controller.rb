@@ -1,5 +1,5 @@
 class RentersController < ApplicationController
-  before_filter :authenticate_user!, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
   before_action :set_renter, only: [:show, :edit, :update, :destroy, :publish]
   before_action :create_order, only: [:show]
@@ -157,11 +157,11 @@ class RentersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_renter
     @renter = Renter.find(params[:id])
-    @renter = current_user.renters.find_by_id(params[:id]) if current_user.has_role?(:manager)
+    @renter = current_user.renters.find_by_id(params[:id]) if user_signed_in? && current_user.has_role?(:manager)
   end
 
   def create_order
-    @renter.create_order(current_user) if current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor)
+    @renter.create_order(current_user) if user_signed_in? && (current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor))
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

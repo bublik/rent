@@ -44,7 +44,7 @@
       - else
         - if renter.phone_format.eql?('last_digits')
           .phone= renter.phone_masked
-        = link_to('Открыть', renter_path(renter), class: 'btn btn-success btn-xs')
+      = link_to('Открыть', renter_path(renter), class: 'btn btn-success btn-xs')
   %td.text-muted.description.small
     %em= renter.description(action_name)
   %td
