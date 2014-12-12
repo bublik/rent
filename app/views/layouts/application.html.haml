@@ -12,10 +12,22 @@
   %body
     %header
       = render 'layouts/navigation'
-
     %main{:role => "main"}
       .container
         .content
           = render 'layouts/messages'
           = yield
+      #authorized.modal{tabindex: "-1", role: "dialog", aria: {labelledby: "authorizedLabel", hidden: "true"}}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button{:type => "button", :class => "close", 'data-dismiss' => "modal"}
+                %span{'aria-hidden' => "true"}x
+                %span.sr-only Close
+              %h5.modal-title{id: 'authorizedLabelModal'} &nbsp;
+            .modal-body
+              %p
+                .text-center Для открытия объявления необходимо авторизоваться.
+                .text-center Вы можете #{link_to('Войти', new_user_session_path)} или #{link_to('Зарегистрироваться', new_user_registration_path)}.
+                %br
     %footer

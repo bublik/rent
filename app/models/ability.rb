@@ -12,11 +12,11 @@ class Ability
     can :update, User, {id: user.id}
 
     # guest
-    if user.roles.blank?
-      can :show, Renter do |renter|
-        (renter.guard_time < Time.now) || renter.state.eql?('sold') || renter.phone_format.eql?('sold')
-      end
-    end
+    # if user.roles.blank?
+    #   can :show, Renter do |renter|
+    #     (renter.guard_time < Time.now) || renter.state.eql?('sold') || renter.phone_format.eql?('sold')
+    #   end
+    # end
 
     if user.has_role? :manager
       can [:read, :create, :update, :buy], Renter, {user_id: user.id}

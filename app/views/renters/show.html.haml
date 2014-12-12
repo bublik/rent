@@ -16,10 +16,8 @@
 
     .col-md-3
       - if can?(:show, renter.object)
-        .phone
-          = renter.phone
-        .email
-          = renter.email
+        .phone= renter.phone
+        .email= renter.email
       - else
         %span.label.label-danger оплатите информацию
         - unless renter.phone_format.eql?('everytime')

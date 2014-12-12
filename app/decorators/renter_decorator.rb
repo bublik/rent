@@ -22,7 +22,7 @@ class RenterDecorator < Draper::Decorator
   end
 
   def email
-    h.icon_tag('envelope') + ' ' + h.mail_to(object.email)
+    object.email.blank? ? '' : h.icon_tag('envelope') + ' ' + h.mail_to(object.email)
   end
 
   def people
