@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117183857) do
+ActiveRecord::Schema.define(version: 20141212093445) do
 
   create_table "accesses", force: true do |t|
     t.integer  "user_id"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20141117183857) do
     t.string   "phone_format", default: "timer"
     t.integer  "town_id"
     t.integer  "max_sales"
+    t.boolean  "agent",        default: false
   end
 
   create_table "roles", force: true do |t|

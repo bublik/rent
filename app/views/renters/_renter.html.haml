@@ -1,8 +1,10 @@
 - renter = renter.decorate
 
 %tr.text-info.renter{'data-url' => renter_path(renter)}
-  %td
-    = renter.created_at
+  %td.text-center
+    %div= renter.created_at
+    - if renter.agent?
+      %span.label.label-info{ data: {toggle: 'tooltip', placement: 'top', title: 'Заявка от агента'}} Агент
     - if renter.new?
       %span.label.label-warning{ data: {toggle: 'tooltip', placement: 'top', title: 'Ожидает публикации админом'}} new
     - if user_signed_in? && current_user.has_role?(:admin) && renter.published? && (renter.object.published_at > Time.now)

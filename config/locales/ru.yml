@@ -276,6 +276,7 @@ ru:
         phone: Телефон
         email: Email
         guard_time: Платное до (таймер)
+        agent: Заявка от Агента
         town: Город
         rooms: Комнат
         people: 'Человек'
