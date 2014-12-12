@@ -79,7 +79,7 @@ class Renter < ActiveRecord::Base
   end
 
   def expired?
-    self.check_in < Time.now
+    (self.guard_time < Time.now)  #(self.check_in < Time.now)
   end
 
   # находим все сообщения которые в статусе published и больше чем published_at
