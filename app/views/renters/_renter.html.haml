@@ -24,15 +24,20 @@
   %td
     - if user_signed_in?
       - if renter.phone_format.eql?('sold') || renter.expired? || renter.sold?
-        %span.badge Продано
+        - if renter.sold?
+          %span.badge Продано
         - if can?(:show, renter.object)
           .phone= renter.phone
           .email= renter.email
       - else
         - if can?(:show, renter.object)
+          - if current_user.is_admin? && ['timer', 'last_digits'].include?(renter.phone_format)
+            .text-muted
+              = icon_tag('eye-close')
+              = renter.guard_time
           .phone= renter.phone
           .email= renter.email
-        - elsif can?(:buy, renter.object)
+        - else #if can?(:buy, renter.object)
           %span.label.label-danger откройте информацию
           - if renter.phone_format.eql?('last_digits')
             .phone= renter.phone_masked
@@ -45,7 +50,7 @@
         .col-xs-7
           - if renter.phone_format.eql?('sold') || renter.sold?
             %span.badge Продано
-          - elsif renter.phone_format.eql?('last_digits') && renter.expired?
+          - elsif ['timer', 'last_digits'].include?(renter.phone_format) && renter.expired?
             .phone= renter.phone
             .email= renter.email
           - else
@@ -62,7 +67,7 @@
     %em= renter.description(action_name)
   %td
     - if user_signed_in?
-      - if !current_user.has_role?(:manager)
+      - if !current_user.is_manager?
         - if can?(:show, renter.object) || (can?(:buy, renter.object) && !renter.phone_format.eql?('sold'))
           = link_to 'Открыть', renter_path(renter), class: 'btn btn-success btn-xs'
         - elsif !renter.phone_format.eql?('sold')

@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   after_create :send_admin_notification
 
   def disable_subscription
-    subscribe = false
+    self.subscribe = false
     true
   end
 
@@ -66,8 +66,20 @@ class User < ActiveRecord::Base
     self.has_role?(:admin)
   end
 
+  def is_manager?
+    self.has_role?(:manager)
+  end
+
+  def is_realtor?
+    self.has_role?(:realtor)
+  end
+
+  def is_vip_realtor?
+    self.has_role?(:vip_realtor)
+  end
+
   def self.admin
-    admin = User.has_role(:admin).first
+    User.has_role(:admin).first
   end
 
   # inform first admin about new user for more fast verification

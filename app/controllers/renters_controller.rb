@@ -10,7 +10,7 @@ class RentersController < ApplicationController
     @renters = Renter.order(sort_column + " " + sort_direction)
 
     if user_signed_in?
-      @renters = current_user.renters.order(sort_column + " " + sort_direction) if current_user.has_role?(:manager)
+      @renters = current_user.renters.order(sort_column + " " + sort_direction) if current_user.is_manager?
       if current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor)
         @renters = params[:with_order].eql?('true') ? @renters.with_order(current_user) : @renters.published
         #   @renters = @renters.hide_inactive
@@ -157,7 +157,7 @@ class RentersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_renter
     @renter = Renter.find(params[:id])
-    @renter = current_user.renters.find_by_id(params[:id]) if user_signed_in? && current_user.has_role?(:manager)
+    @renter = current_user.renters.find_by_id(params[:id]) if user_signed_in? && current_user.is_manager?
   end
 
   def create_order
