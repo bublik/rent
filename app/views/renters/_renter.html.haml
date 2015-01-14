@@ -39,7 +39,7 @@
           .email= renter.email
         - else #if can?(:buy, renter.object)
           %span.label.label-danger откройте информацию
-          - if renter.phone_format.eql?('last_digits')
+          - if ['everytime', 'last_digits'].include?(renter.phone_format)
             .phone= renter.phone_masked
           - unless renter.phone_format.eql?('everytime')
             .text-muted
@@ -55,7 +55,7 @@
             .email= renter.email
           - else
             %span.label.label-danger откройте информацию
-            - if renter.phone_format.eql?('last_digits')
+            - if ['everytime', 'last_digits'].include?(renter.phone_format)
               .phone= renter.phone_masked
             - unless renter.phone_format.eql?('everytime')
               .text-muted
