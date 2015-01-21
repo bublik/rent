@@ -26,7 +26,7 @@ class HomeController < ApplicationController
     if request.post?
       @renter = Renter.new(params.require(:renter).permit!)
       if @renter.valid? && Notifications.send_renter(@user, @renter).deliver
-        flash[:notice] = 'Ваше письмо отправлено!'
+        flash[:notice] = 'Ваша заявка подана!'
         @renter = Renter.new
       end
     end
