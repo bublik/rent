@@ -24,6 +24,7 @@
           = submit_tag('Найти', class: 'btn btn-success')
       - else
         = link_to 'О нас', about_path, class: 'navbar-brand'
+        = link_to 'Подать объявление', send_renter_path, class: 'btn btn-success navbar-btn'
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li= link_to 'Администрация', administration_path

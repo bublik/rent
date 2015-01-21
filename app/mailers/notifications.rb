@@ -3,6 +3,11 @@ class Notifications < ActionMailer::Base
 
   helper :application
 
+  def send_renter(user, renter)
+    @renter = renter.decorate
+    mail to: user.email, subject: "Подано - Новое объявление" #[#{renter.town}]
+  end
+
   def new_renter(user, renter)
     @user = user
     @renter = renter.decorate

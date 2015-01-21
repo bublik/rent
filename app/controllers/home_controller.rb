@@ -20,4 +20,15 @@ class HomeController < ApplicationController
     end
   end
 
+  def send_renter
+    @renter = Renter.new()
+    @user = User.find_by_email(ENV['ADMIN_EMAIL'])
+    if request.post?
+      @renter = Renter.new(params.require(:renter).permit!)
+      if @renter.valid? && Notifications.send_renter(@user, @renter).deliver
+        flash[:notice] = 'Ваше письмо отправлено!'
+        @renter = Renter.new
+      end
+    end
+  end
 end

@@ -3,7 +3,7 @@ Rent::Application.routes.draw do
   root :to => "renters#index"
   get "/about" => "home#about", via: [:get], :as => :about
   match "/administration" => "home#administration", via: [:get, :post], :as => :administration
-  #post "/administration" => "home#administration", via: [:post], :as => :administration
+  match "/send_renter" => "home#send_renter", via: [:get, :post], :as => :send_renter
 
   devise_for :users, :controllers => {:registrations => "registrations"}
 

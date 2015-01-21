@@ -278,6 +278,7 @@ ru:
         guard_time: Платное до (таймер)
         agent: Заявка от Агента
         town: Город
+        town_name: 'Город'
         rooms: Комнат
         people: 'Человек'
         phone_format: 'Вид телефона'

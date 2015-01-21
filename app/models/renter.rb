@@ -39,6 +39,7 @@ class Renter < ActiveRecord::Base
   validates :amount_grn, numericality: true, allow_nil: true
   validates :rooms, numericality: true
   validates :phone_format, inclusion: {in: FORMATS}
+  attr_accessor :town_name
 
   scope :newest, -> { order('updated_at DESC') }
   scope :hide_inactive, -> { where('check_in >= ?', Time.now) }
