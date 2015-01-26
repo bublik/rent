@@ -3,7 +3,7 @@
   .row
     = f.input :phone, placeholder: '+380671111111'
     = f.input :email, placeholder: 'Email'
-    = f.input :town_id, placeholder: 'Город', as: :select, collection: Town.all, include_blank: false
+    = f.input :town_id, placeholder: 'Город', as: :select, collection: Town.all, selected: 2, include_blank: false
     = f.input :phone_format, as: :select, collection: [['Открывать по таймеру', :timer], ['Маскировать телефон ** (пока таймер)', :last_digits], ['Скрывать тел до оплаты (таймер игнорируется)', :everytime], ['Продано', :sold]], include_blank: false
     = f.input :rooms, placeholder: 'комнат'
     = f.input :people, placeholder: 'человек'

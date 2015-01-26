@@ -4,11 +4,13 @@
   .row
     = f.input :phone, placeholder: '+380671111111'
     = f.input :email, placeholder: 'Email'
-    = f.input :town_name, placeholder: 'Город'
-    = f.input :rooms, placeholder: 'комнат'
+    = f.input :town_name, placeholder: 'Город', required: true
+    = f.input :town_area, placeholder: 'Район города', label: 'Район города'
+    = f.input :rooms, as: :string, placeholder: 'комнат'
     = f.input :people, placeholder: 'человек'
-    = f.input :amount, placeholder: 'цена в USD'
-    = f.input :amount_grn, placeholder: 'цена в UAH'
+    = f.input :amount_grn, as: :string, label: 'Цена от UAH', placeholder: 'цена в UAH'
+    = f.input :amount, as: :string, label: 'Цена до UAH', placeholder: 'цена в UAH'
+    = f.input :flat_type, placeholder: 'Квартира, комната, дом, коммерческая', label: 'Тип недвижимости'
     = f.input :check_in, placeholder: 'дата заезда'
     = f.input :check_out, placeholder: 'дата выезда'
     = f.input :description, as: :text, placeholder: 'Не обязательно'

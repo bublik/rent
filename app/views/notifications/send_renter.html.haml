@@ -2,11 +2,15 @@
   %h2 Предложение добавить новое объявление
   %div Телефон: #{@renter.phone}
   %div Город: #{@renter.town_name}
+  %div Район: #{@renter.town_area}
+  %div Тип: #{@renter.flat_type}
   %div Комнат: #{@renter.rooms}
   %div Человек: #{@renter.people}
-  %div Цена: #{@renter.amount}
-  %div Цена: #{@renter.amount_grn}
-  %p Описание: #{@renter.description}
+  %div Цена от: #{@renter.amount_grn}
+  %div Цена до: #{@renter.object.amount}
+  %p
+    %b Описание:
+    #{@renter.description}
 
 %p
   %b Добавьте это объявление на сайт через веб интерфейс.
