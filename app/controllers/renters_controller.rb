@@ -26,7 +26,7 @@ class RentersController < ApplicationController
       @renters = @renters.check_in_from(Date.parse(params[:check_in]))
     end
 
-    @renters = @renters.where(town_id: params[:town_id] || 1)
+    @renters = @renters.where(town_id: params[:town_id] || 2)
     @renters = @renters.page(params[:page]).per(10)
     @url = params.dup
     @url.delete(:town_id)
