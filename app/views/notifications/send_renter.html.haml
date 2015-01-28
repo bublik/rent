@@ -7,8 +7,8 @@
   %div Тип: #{@renter.flat_type}
   %div Комнат: #{@renter.rooms}
   %div Человек: #{@renter.people}
-  %div Цена от: #{@renter.amount_grn}
-  %div Цена до: #{@renter.object.amount}
+  %div Цена от: #{@renter.amount_to}
+  %div Цена до: #{@renter.object.amount_from}
   %p
     %b Описание:
     #{@renter.description}

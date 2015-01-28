@@ -86,7 +86,13 @@ class RentersController < ApplicationController
 
     respond_to do |format|
       if @renter.save
-        format.html { redirect_to @renter, notice: 'Запись успешно добавлена.' }
+        format.html {
+          if current_user.has_role?(:realtor) || current_user.has_role?(:vip_realtor)
+            redirect_to root_path, notice: 'Заявка отправлена'
+          else
+            redirect_to @renter, notice: 'Запись успешно добавлена.'
+          end
+        }
         format.json { render action: 'show', status: :created, location: @renter }
       else
         format.html { render action: 'new' }
@@ -166,6 +172,6 @@ class RentersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def renter_params
-    params.require(:renter).permit(:phone, :email, :phone_format, :guard_time, :town_id, :max_sales, :rooms, :people, :amount, :amount_grn, :check_in, :check_out, :description, :agent)
+    params.require(:renter).permit(:phone, :email, :phone_format, :guard_time, :town_id, :max_sales, :rooms, :people, :amount_from, :amount_to, :check_in, :check_out, :description, :agent)
   end
 end

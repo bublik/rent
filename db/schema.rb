@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141212093445) do
+ActiveRecord::Schema.define(version: 20150128063018) do
 
   create_table "accesses", force: true do |t|
     t.integer  "user_id"
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20141212093445) do
     t.string   "email"
     t.datetime "guard_time"
     t.string   "town"
-    t.integer  "rooms"
-    t.integer  "amount"
+    t.string   "rooms"
+    t.integer  "amount_from"
     t.datetime "check_in"
     t.text     "description"
     t.datetime "created_at"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20141212093445) do
     t.integer  "user_id",      default: 1,       null: false
     t.integer  "orders_count", default: 0,       null: false
     t.datetime "check_out"
-    t.integer  "amount_grn"
+    t.integer  "amount_to"
     t.string   "state"
     t.datetime "published_at"
     t.integer  "people"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20141212093445) do
     t.integer  "town_id"
     t.integer  "max_sales"
     t.boolean  "agent",        default: false
+    t.string   "town_area"
   end
 
   create_table "roles", force: true do |t|

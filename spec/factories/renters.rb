@@ -7,7 +7,7 @@
 #  email        :string(255)
 #  guard_time   :datetime
 #  town         :string(255)
-#  rooms        :integer
+#  rooms        :string(255)
 #  amount       :integer
 #  check_in     :datetime
 #  description  :text
@@ -22,6 +22,9 @@
 #  people       :integer
 #  has_emailed  :boolean          default(FALSE), not null
 #  phone_format :string(255)      default("timer")
+#  town_id      :integer
+#  max_sales    :integer
+#  agent        :boolean          default(FALSE)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

@@ -1,20 +1,25 @@
+- admin_or_manager = current_user.has_role?(:admin) || current_user.has_role?(:manager)
 = simple_form_for(@renter) do |f|
   = f.error_notification
   .row
     = f.input :phone, placeholder: '+380671111111'
     = f.input :email, placeholder: 'Email'
     = f.input :town_id, placeholder: 'Город', as: :select, collection: Town.all, selected: 2, include_blank: false
-    = f.input :phone_format, as: :select, collection: [['Открывать по таймеру', :timer], ['Маскировать телефон ** (пока таймер)', :last_digits], ['Скрывать тел до оплаты (таймер игнорируется)', :everytime], ['Продано', :sold]], include_blank: false
-    = f.input :rooms, placeholder: 'комнат'
+    = f.input :town_area, placeholder: 'Район города, станция метро'
+    - if admin_or_manager
+      = f.input :phone_format, as: :select, collection: [['Открывать по таймеру', :timer], ['Маскировать телефон ** (пока таймер)', :last_digits], ['Скрывать тел до оплаты (таймер игнорируется)', :everytime], ['Продано', :sold]], include_blank: false
+    = f.input :rooms, placeholder: 'можно разделять запятыми'
     = f.input :people, placeholder: 'человек'
-    = f.input :amount, placeholder: 'цена в USD'
-    = f.input :amount_grn, placeholder: 'цена в UAH'
-    = f.input :max_sales, placeholder: 'введите число продаж (объявление будет помечено как продано)'
+    = f.input :amount_from, placeholder: 'цена от ГРН'
+    = f.input :amount_to, placeholder: 'цена до ГРН'
+    - if admin_or_manager
+      = f.input :max_sales, placeholder: 'введите число продаж (объявление будет помечено как продано)'
     = f.input :check_in, placeholder: 'дата заезда'
     = f.input :check_out, placeholder: 'дата выезда'
     - if current_user.has_role?(:admin)
       = f.input :guard_time
-    = f.input :agent, as: :boolean
+    - if admin_or_manager
+      = f.input :agent, as: :boolean
     = f.input :description, as: :text, placeholder: 'Не обязательно'
 
   .row

@@ -4,10 +4,10 @@
   %div Комнат: #{@renter.rooms}
   - unless @renter.people.blank?
     %div Человек: #{@renter.people}
-  - unless @renter.amount.blank?
-    %div Цена: #{@renter.amount}
-  - unless @renter.amount_grn.blank?
-    %div Цена: #{@renter.amount_grn}
+  - unless @renter.amount_from.blank?
+    %div Цена от: #{@renter.amount_from}
+  - unless @renter.amount_to.blank?
+    %div Цена до: #{@renter.amount_to}
   %div Описание: #{@renter.description}
   %div Будет доступно остальным: #{@renter.published_at}
 

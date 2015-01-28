@@ -4,10 +4,10 @@
 Комнат: #{@renter.rooms}
 - unless @renter.people.blank?
   Человек: #{@renter.people}
-- unless @renter.amount.blank?
-  Цена: #{@renter.amount}
-- unless @renter.amount_grn.blank?
-  Цена: #{@renter.amount_grn}
+- unless @renter.amount_from.blank?
+  Цена от: #{@renter.amount_from}
+- unless @renter.amount_to.blank?
+  Цена до: #{@renter.amount_to}
 Описание: #{@renter.description}
 
 Будет доступно остальным: #{@renter.published_at}

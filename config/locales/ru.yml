@@ -279,11 +279,12 @@ ru:
         agent: Заявка от Агента
         town: Город
         town_name: 'Город'
+        town_area: 'Район города'
         rooms: Комнат
         people: 'Человек'
         phone_format: 'Вид телефона'
-        amount: Цена USD
-        amount_grn: Цена UAH
+        amount_from: Цена от
+        amount_to: Цена до
         max_sales: 'Число продаж'
         check_in: Время заселения
         check_out: Время выезда

@@ -11,9 +11,7 @@
             = renter.rooms
             = renter.people
             %span.badge.pull-right
-              = renter.amount
-              = renter.amount_grn
-
+              #{renter.amount_from} - #{renter.amount_to}
     .col-md-3
       - if can?(:show, renter.object)
         .phone= renter.phone

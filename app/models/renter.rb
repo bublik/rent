@@ -7,7 +7,7 @@
 #  email        :string(255)
 #  guard_time   :datetime
 #  town         :string(255)
-#  rooms        :integer
+#  rooms        :string(255)
 #  amount       :integer
 #  check_in     :datetime
 #  description  :text
@@ -16,12 +16,15 @@
 #  user_id      :integer          default(1), not null
 #  orders_count :integer          default(0), not null
 #  check_out    :datetime
-#  amount_grn   :integer
+#  amount_to   :integer
 #  state        :string(255)
 #  published_at :datetime
 #  people       :integer
 #  has_emailed  :boolean          default(FALSE), not null
 #  phone_format :string(255)      default("timer")
+#  town_id      :integer
+#  max_sales    :integer
+#  agent        :boolean          default(FALSE)
 #
 
 class Renter < ActiveRecord::Base
@@ -35,11 +38,11 @@ class Renter < ActiveRecord::Base
   FORMATS = %w(timer last_digits everytime sold)
   validates :user_id, :phone, :rooms, presence: true
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}, allow_blank: true
-  validates :amount, numericality: true, allow_nil: true
-  validates :amount_grn, numericality: true, allow_nil: true
+  validates :amount_from, numericality: true, allow_nil: true
+  validates :amount_to, numericality: true, allow_nil: true
   #validates :rooms, numericality: true
   validates :phone_format, inclusion: {in: FORMATS}
-  attr_accessor :town_name, :town_area, :flat_type
+  attr_accessor :town_name, :flat_type
 
   scope :newest, -> { order('updated_at DESC') }
   scope :hide_inactive, -> { where('check_in >= ?', Time.now) }

@@ -22,14 +22,9 @@ class Ability
       can [:read, :create, :update, :buy], Renter, {user_id: user.id}
     end
 
-    if user.has_role? :realtor
+    if user.has_role?(:realtor) || user.has_role?(:vip_realtor)
       can :show, Renter do |renter|
-        has_order = renter.orders.where('user_id = ?', user.id).count.eql?(1)
-        if !has_order && ['sold', 'everytime'].include?(renter.phone_format)
-          false
-        else
-          has_order || renter.guard_time < Time.now
-        end
+        renter.user_id.eql?(user.id) || realtor_can_read?(renter, user)
       end
 
       can :buy, Renter do |renter|
@@ -37,20 +32,6 @@ class Ability
       end
     end
 
-    if user.has_role? :vip_realtor
-      can :show, Renter do |renter|
-        has_order = renter.orders.where('user_id = ?', user.id).count.eql?(1)
-        if !has_order && ['sold', 'everytime'].include?(renter.phone_format)
-          false
-        else
-          has_order || renter.guard_time < Time.now
-        end
-      end
-
-      can :buy, Renter do |renter|
-        user.free_orders > 0 && !renter.phone_format.eql?('sold')
-      end
-    end
 
     # Define abilities for the passed in user here. For example:
     #
@@ -74,5 +55,15 @@ class Ability
     #   can :update, Article, :published => true
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
+  end
+  private
+
+  def realtor_can_read?(renter, user)
+    has_order = renter.orders.where('user_id = ?', user.id).count.eql?(1)
+    if !has_order && ['sold', 'everytime'].include?(renter.phone_format)
+      false
+    else
+      has_order || renter.guard_time < Time.now
+    end
   end
 end

@@ -13,12 +13,12 @@ class RenterDecorator < Draper::Decorator
     h.icon_tag('phone') + ' ' + h.number_to_phone(mask(object.phone))
   end
 
-  def amount
-    h.number_to_currency(object.amount, precision: 0, unit: '$')
+  def amount_from
+    h.number_to_currency(object.amount_from, precision: 0, unit: 'гр')
   end
 
-  def amount_grn
-    h.number_to_currency(object.amount_grn, precision: 0, unit: 'гр')
+  def amount_to
+    h.number_to_currency(object.amount_to, precision: 0, unit: 'гр')
   end
 
   def email
@@ -26,11 +26,11 @@ class RenterDecorator < Draper::Decorator
   end
 
   def people
-    object.people && "#{object.people}чел"
+    object.people && "#{object.people} чел"
   end
 
   def rooms
-    "#{object.rooms}ком"
+    "#{object.rooms} ком"
   end
 
   def description(action_name = 'index')

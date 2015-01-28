@@ -7,9 +7,9 @@
   %div Описание: #{@renter.description}
   - unless @renter.people.blank?
     %div Человек: #{@renter.people}
-  - unless @renter.amount.blank?
-    %div Цена: #{@renter.amount}
-  - unless @renter.amount_grn.blank?
-    %div Цена: #{@renter.amount_grn}
+  - unless @renter.amount_from.blank?
+    %div Цена от: #{@renter.amount_from}
+  - unless @renter.amount_to.blank?
+    %div Цена до: #{@renter.amount_to}
 
 %div Дата публикации: #{@renter.updated_at}

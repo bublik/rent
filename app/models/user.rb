@@ -34,6 +34,7 @@
 #  renters_count          :integer          default(0), not null
 #  free_orders            :integer          default(0), not null
 #  subscribe              :boolean          default(TRUE), not null
+#  auth_token             :string(255)
 #
 
 class User < ActiveRecord::Base

@@ -1,8 +1,8 @@
 - if user_signed_in?
   - if current_user.is_realtor? || current_user.is_vip_realtor?
     %li= link_to 'Открытые', renters_path(with_order: true), title: 'Открытые объявления'
-  - if current_user.is_admin? || current_user.is_manager?
-    %li= link_to 'Новое объявл.', new_renter_path
+  -# if current_user.is_admin? || current_user.is_manager?
+  %li= link_to 'Новое объявл.', new_renter_path
   - if current_user.is_admin?
     %li= link_to 'Пользователи', users_path
     %li= link_to 'Настройки', settings_path
