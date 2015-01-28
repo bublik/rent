@@ -42,11 +42,13 @@ class RenterDecorator < Draper::Decorator
   end
 
   def check_in
-    h.content_tag(:span, h.l(object.check_in, format: :check), class: 'label label-success')
+    object.show_check_in ?
+    h.content_tag(:span, h.l(object.check_in, format: :check), class: 'label label-success') : ''
   end
 
   def check_out
-    object.check_out && h.content_tag(:span, h.l(object.check_out, format: :check), class: 'label label-default')
+    object.show_check_out ?
+    (object.check_out && h.content_tag(:span, h.l(object.check_out, format: :check), class: 'label label-default ')) : ''
   end
 
   def created_at

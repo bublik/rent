@@ -287,7 +287,9 @@ ru:
         amount_to: Цена до
         max_sales: 'Число продаж'
         check_in: Время заселения
+        show_check_in: Показывать дату заезда
         check_out: Время выезда
+        show_check_out: Показывать дату выезда
         description: Описание
         updated_at: Добавлено
   helpers:
