@@ -22,11 +22,11 @@
         -#%th= sortable "town", "Город"
         %th= sortable "created_at", "Дата пуб"
         %th.room_and_price{style: 'width: 250px'}
+          = sortable "amount_from", "Цена"
+          \/
           = sortable "rooms", "Комнат"
           \/
           = sortable "people", "Человек"
-          \/
-          = sortable "amount_from", "Цена"
         %th= sortable "check_in", "Проживание"
         %th Tel/email
         %th Описание

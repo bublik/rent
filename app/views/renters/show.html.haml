@@ -32,9 +32,8 @@
 
   .row.text-info
     .col-md-4.mtop10
-      %div
-        - unless renter.town.blank?
-          = renter.town
+      - unless renter.town.blank?
+        %h4= renter.town
       %span{ data: {toggle: 'tooltip', placement: 'top', title: 'Заезд / Выезд'}}
         = renter.check_in
         = renter.check_out
