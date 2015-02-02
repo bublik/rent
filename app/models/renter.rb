@@ -39,7 +39,7 @@ class Renter < ActiveRecord::Base
   has_many :users, through: :accsesses
 
   FORMATS = %w(timer last_digits everytime sold)
-  validates :user_id, :phone, :rooms, presence: true
+  validates :phone, :rooms, presence: true
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}, allow_blank: true
   validates :amount_from, numericality: true, allow_nil: true
   validates :amount_to, numericality: true, allow_nil: true
